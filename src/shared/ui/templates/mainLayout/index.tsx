@@ -14,6 +14,7 @@ export const BaseLayout=({children}:BaseLayoutProps)=>{
         </aside>
         <main className={styles['center']}>
           {children}
+        
         </main>
       {/* </div> */}
     </div>

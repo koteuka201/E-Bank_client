@@ -3,7 +3,8 @@
     "baseUrl": "./src",
     "paths": {
       "@shared/*": ["shared/*"],
-      "@widgets/*": ["widgets/*"]
+      "@widgets/*": ["widgets/*"],
+      "@pages/*": ["pages/*"],
     },
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
