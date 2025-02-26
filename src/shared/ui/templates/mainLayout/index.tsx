@@ -2,6 +2,7 @@ import { HTMLAttributes, PropsWithChildren } from 'react'
 import cn from 'classnames'
 import styles from './index.module.scss'
 import { AsideBlock } from './asideBlock'
+import { LogOutButton } from '@features/logout'
 
 export type BaseLayoutProps = PropsWithChildren<HTMLAttributes<HTMLDivElement>>
 
@@ -14,7 +15,9 @@ export const BaseLayout=({children}:BaseLayoutProps)=>{
         <main>
           {children}        
         </main>
-        
+        <aside className='w-100 justify-self-start ml-[90px]'>
+          <LogOutButton />
+        </aside>
     </div>
   )
 }

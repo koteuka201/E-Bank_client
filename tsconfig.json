@@ -5,6 +5,7 @@
       "@shared/*": ["shared/*"],
       "@widgets/*": ["widgets/*"],
       "@pages/*": ["pages/*"],
+      "@features/*": ["features/*"],
     },
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -35,7 +36,7 @@
     "jsx": "react-jsx",
     "types": ["vite/client"]
   },
-  "include": ["./src", "src", "./src/*", "vite.config.ts", "eslint.config.js", "stylelint.config.js", "tailwind.config"],
+  "include": ["./src", "src", "./src/*", "vite.config.ts", "eslint.config.js", "stylelint.config.js", "tailwind.config.js", "postcss.config.js"],
   "ts-node": {
     "compilerOptions": {
       "module": "node16"
