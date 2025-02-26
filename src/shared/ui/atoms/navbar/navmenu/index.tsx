@@ -15,11 +15,11 @@ export const NavMenu=({className}: NavMenuProps)=>{
   
   return (
     <nav className={cn("flex flex-col gap-5 w-100 mt-[50px] ps-[2px]", className)}>
-      <NavItem label='Главная' to={WELCOME_PAGE_URL} icon={<House size={22} />} isHilight={location.pathname==WELCOME_PAGE_URL} />
-      <NavItem label='Счета' to={MY_BANK_ACCOUNTS_PAGE_URL} icon={<CreditCard size={22} />} isHilight={location.pathname==MY_BANK_ACCOUNTS_PAGE_URL} />
-      <NavItem label='Кредиты' to={CREDITS_CATALOG_PAGE_URL} icon={<SquareChartGantt size={22} />} isHilight={location.pathname==CREDITS_CATALOG_PAGE_URL} />
-      <NavItem label='Клиенты' to={CLIENTS_PAGE_URL} icon={<Users size={22} />} isHilight={location.pathname==CLIENTS_PAGE_URL} />
-      <NavItem label='Сотрудники' to={STAFF_PAGE_URL} icon={<UserCog size={22} />} isHilight={location.pathname==STAFF_PAGE_URL} />
+      <NavItem label='Главная' to={WELCOME_PAGE_URL} icon={<House size={22} />} isHighLight={location.pathname==WELCOME_PAGE_URL} />
+      <NavItem label='Счета' to={MY_BANK_ACCOUNTS_PAGE_URL} icon={<CreditCard size={22} />} isHighLight={location.pathname==MY_BANK_ACCOUNTS_PAGE_URL} />
+      <NavItem label='Кредиты' to={CREDITS_CATALOG_PAGE_URL} icon={<SquareChartGantt size={22} />} isHighLight={location.pathname==CREDITS_CATALOG_PAGE_URL} />
+      <NavItem label='Клиенты' to={CLIENTS_PAGE_URL} icon={<Users size={22} />} isHighLight={location.pathname==CLIENTS_PAGE_URL} />
+      <NavItem label='Сотрудники' to={STAFF_PAGE_URL} icon={<UserCog size={22} />} isHighLight={location.pathname==STAFF_PAGE_URL} />
     </nav>
   )
 }

@@ -13,6 +13,8 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.66.9",
+    "axios": "^1.8.0",
     "classnames": "^2.5.1",
     "eslint-plugin-react-hooks": "^5.1.0",
     "lucide-react": "^0.475.0",

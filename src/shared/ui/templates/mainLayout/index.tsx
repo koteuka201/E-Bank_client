@@ -8,12 +8,13 @@ export type BaseLayoutProps = PropsWithChildren<HTMLAttributes<HTMLDivElement>>
 export const BaseLayout=({children}:BaseLayoutProps)=>{
   return(
     <div className={cn('', styles['display'])}>
-        <aside className='w-100 justify-self-end mr-[100px]'>
+        <aside className='w-100 justify-self-end mr-[90px]'>
           <AsideBlock />
         </aside>
         <main>
           {children}        
         </main>
+        
     </div>
   )
 }
