@@ -6,6 +6,7 @@
       "@widgets/*": ["widgets/*"],
       "@pages/*": ["pages/*"],
       "@features/*": ["features/*"],
+      "@entities/*": ["entities/*"],
     },
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],

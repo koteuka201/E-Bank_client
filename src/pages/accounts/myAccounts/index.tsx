@@ -1,11 +1,11 @@
-import { Container } from "@shared/ui"
+import { Route } from "react-router-dom"
+import { MyAccounts } from "./page"
 
-export const MyAccounts=()=>{
-  return(
-    <>
-      <Container fluid>
-        asda
-      </Container>
-    </>
-  )
-}
+export const MyAccountsRouting=(
+  <Route
+    element={<MyAccounts />}
+    path="my"
+  >
+    <Route element={<MyAccounts />} path=":page" />
+  </Route>
+)

@@ -12,7 +12,7 @@ export const BaseLayout=({children}:BaseLayoutProps)=>{
         <aside className='w-100 justify-self-end mr-[90px]'>
           <AsideBlock />
         </aside>
-        <main>
+        <main className=''>
           {children}        
         </main>
         <aside className='w-100 justify-self-start ml-[90px]'>

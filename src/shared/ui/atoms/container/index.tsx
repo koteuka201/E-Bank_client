@@ -10,7 +10,7 @@ export const Container = ({ fluid, className, children }: ContainerProps) => {
   return (
     <div
       className={cn(
-        fluid ? "w-full px-4 sm:px-6 lg:px-8" : "max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8",
+        fluid ? "w-full px-1 sm:px-2 lg:px-3" : "max-w-screen-xl mx-auto px-1 sm:px-2 lg:px-3",
         className
       )}
     >

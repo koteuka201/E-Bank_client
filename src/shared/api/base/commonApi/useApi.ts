@@ -1,9 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { api } from "./api"
 import { MutationOptions } from "../mutationOptionsType"
+import { ApiTagsEnum } from "@shared/api"
 
 
-export const useApiQuery = <R>(key: string[], url: string, params?: Record<string, any>) => {
+export const useApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: Record<string, any>) => {
   return useQuery<R>({
     queryKey: key,
     queryFn: async () => {
