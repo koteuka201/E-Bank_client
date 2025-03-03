@@ -6,7 +6,12 @@ export const Routing=()=>{
   
   const testAccountRouting= 
   <Route >
-    <Route path={MY_BANK_ACCOUNTS_PAGE_URL} element={<div>acc</div>}/>
+    <Route path={MY_BANK_ACCOUNTS_PAGE_URL} element={
+      <div className="container">
+      <h1 className="text-2xl font-bold">Привет, Tailwind!</h1>
+    </div>
+    }
+    />
   </Route>
   const testcreditRouting= 
   <Route >
