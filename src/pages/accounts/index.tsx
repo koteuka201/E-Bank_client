@@ -6,5 +6,8 @@ export const AccountsRouting=(
     <Route path="accounts">
       {MyAccountsRouting}
     </Route>
+    <Route path="account">
+      
+    </Route>
   </>
 )

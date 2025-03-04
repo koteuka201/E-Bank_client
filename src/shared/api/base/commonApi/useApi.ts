@@ -1,7 +1,8 @@
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { api } from "./api"
 import { MutationOptions } from "../mutationOptionsType"
 import { ApiTagsEnum } from "@shared/api"
+import { AxiosRequestConfig } from "axios"
 
 
 export const useApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: Record<string, any>) => {
@@ -14,21 +15,27 @@ export const useApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: Record<
   })
 }
 
-export const useApiMutation = ({ url, method }: MutationOptions) => {
-  return useMutation({
-    mutationFn: async ({ data, headers, params }: { 
-      data?: any
-      headers?: any
-      params?: Record<string, any>
-    }) => {
-      const response = await api({
+export const useApiMutation = <TData = unknown, TResponse = any>(
+  { url, method, invalidateTags }: MutationOptions
+) => {
+  const queryClient = useQueryClient()
+
+  return useMutation<TResponse, Error, { data: TData; headers?: any; params?: Record<string, any> }>({
+    mutationFn: async ({ data, headers, params }) => {
+      const config: AxiosRequestConfig<TData> = {
         url,
         method,
         data,
         headers,
         params,
-      })
+      }
+      const response = await api(config)
       return response.data
+    },
+    onSuccess: () => {
+      if (invalidateTags?.length) {
+        invalidateTags.forEach(tag => queryClient.invalidateQueries({ queryKey: [tag] }))
+      }
     }
   })
 }

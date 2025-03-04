@@ -43,7 +43,7 @@ export const AccountItem=({
       case CardType.DebitCard:
         return 'Дебетовая'
     }
-  },[cardCategory])
+  },[cardType])
 
   const currencySign=useMemo(()=>{
     if(currencyType) return '₽'
