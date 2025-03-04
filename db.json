@@ -1,7 +1,7 @@
 {
   "accounts": [
     {
-      "id": "user-1",
+      "id": "1",
       "debitCardBankAccounts": [
         {
           "bankAccount": {
@@ -11,14 +11,34 @@
             "currencyType": "string",
             "balance": 0,
             "bankAccountType": "Card",
-            "isFrozen": true,
-            "accountName": "string"
+            "isFrozen": false,
+            "accountName": "Счет 1"
           },
           "card": {
             "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
             "createDateTime": "2025-03-03T19:48:03.742Z",
             "modifyDateTime": "2025-03-03T19:48:03.742Z",
-            "cardNumber": "string",
+            "cardNumber": "2200 2555 5555 5555",
+            "cardCategory": "Platinum",
+            "cardType": "DebitCard"
+          }
+        },
+        {
+          "bankAccount": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "createDateTime": "2025-03-03T19:48:03.742Z",
+            "modifyDateTime": "2025-03-03T19:48:03.742Z",
+            "currencyType": "string",
+            "balance": 0,
+            "bankAccountType": "Card",
+            "isFrozen": true,
+            "accountName": "Счет 2"
+          },
+          "card": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "createDateTime": "2025-03-03T19:48:03.742Z",
+            "modifyDateTime": "2025-03-03T19:48:03.742Z",
+            "cardNumber": "2200 2555 5555 6532",
             "cardCategory": "Gold",
             "cardType": "DebitCard"
           }

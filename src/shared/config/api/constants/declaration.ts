@@ -1,1 +1,1 @@
-export const COMMON_API_BASE_URL=''
+export const COMMON_API_BASE_URL='http://localhost:3000'

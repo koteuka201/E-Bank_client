@@ -6,6 +6,6 @@ export const MyAccountsRouting=(
     element={<MyAccounts />}
     path="my"
   >
-    <Route element={<MyAccounts />} path=":page" />
+    <Route element={<MyAccounts />} index />
   </Route>
 )

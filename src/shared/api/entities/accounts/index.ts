@@ -1,4 +1,4 @@
-export * from './BankAccountEnum'
+export * from './bankAccountType'
 export * from './bankAccount'
 export * from './card'
 export * from './cardCategory'

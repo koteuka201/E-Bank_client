@@ -1,5 +1,5 @@
 import { ObjectCMDateTime, StringOrNull } from "@shared/lib"
-import { BankAccountType } from "./BankAccountEnum"
+import { BankAccountType } from "./bankAccountType"
 
 export type BankAccount={
   id: string

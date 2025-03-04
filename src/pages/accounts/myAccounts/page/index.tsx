@@ -6,7 +6,7 @@ export const MyAccounts=()=>{
   return(
     <>
       <Container fluid>
-        <h2 className="font-semibold mt-0 border-b">Кошелёк</h2>
+        <div className="font-semibold text-2xl border-b">Кошелёк</div>
         <Suspense fallback={<Spinner />}>
           <List />
         </Suspense>
