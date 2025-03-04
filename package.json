@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "start": "npm run dev",
     "lint:styles": "stylelint \"**/*.{scss,css}\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "server": "json-server --watch db.json --port 3000"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.3",
@@ -22,6 +23,7 @@
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "eslint-plugin-react-hooks": "^5.1.0",
+    "json-server": "^0.17.4",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

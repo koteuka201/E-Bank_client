@@ -1,0 +1,52 @@
+{
+  "accounts": [
+    {
+      "id": "user-1",
+      "debitCardBankAccounts": [
+        {
+          "bankAccount": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "createDateTime": "2025-03-03T19:48:03.742Z",
+            "modifyDateTime": "2025-03-03T19:48:03.742Z",
+            "currencyType": "string",
+            "balance": 0,
+            "bankAccountType": "Card",
+            "isFrozen": true,
+            "accountName": "string"
+          },
+          "card": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "createDateTime": "2025-03-03T19:48:03.742Z",
+            "modifyDateTime": "2025-03-03T19:48:03.742Z",
+            "cardNumber": "string",
+            "cardCategory": "Gold",
+            "cardType": "DebitCard"
+          }
+        }
+      ],
+      "creditCardBankAccounts": [
+        {
+          "bankAccount": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "createDateTime": "2025-03-03T19:48:03.742Z",
+            "modifyDateTime": "2025-03-03T19:48:03.742Z",
+            "currencyType": "string",
+            "balance": 0,
+            "bankAccountType": "Card",
+            "isFrozen": true,
+            "accountName": "string"
+          },
+          "card": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "createDateTime": "2025-03-03T19:48:03.742Z",
+            "modifyDateTime": "2025-03-03T19:48:03.742Z",
+            "cardNumber": "string",
+            "cardCategory": "Gold",
+            "cardType": "DebitCard",
+            "isActive": true
+          }
+        }
+      ]
+    }
+  ]
+}
