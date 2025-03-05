@@ -8,14 +8,19 @@ import { useSwitch } from "@shared/lib"
 
 export const CreateAccountButton=()=>{
 
-  const {control, handleSubmit, formState: {errors}}=useForm<CreateAccountBody>()
+  const {control, handleSubmit, reset, formState: {errors}}=useForm<CreateAccountBody>()
   const {mutate: createAccount}=useCreateAccount()
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
 
+  const onClose=useCallback(()=>{
+    reset()
+    handleClose()
+  },[reset, handleClose])
+
   const onSubmit: SubmitHandler<CreateAccountBody>=useCallback((data)=>{
     if(data.accountName==undefined || data.currencyType==undefined) return
-    createAccount({data})
+    createAccount({data}, {onSuccess: onClose})
   },[])
 
   return(
