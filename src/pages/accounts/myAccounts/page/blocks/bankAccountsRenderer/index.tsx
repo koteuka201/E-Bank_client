@@ -31,7 +31,7 @@ export const BankAccountsRenderer=({accounts}:BankAccountsRendererProps)=>{
   return(
     <div className="grid gap-1.5">
       {accounts.map((account, index)=>(
-        <Link key={index} to={GENERATE_BANK_ACCOUNT_PAGE_URL(account.bankAccount.id)}>
+        <Link key={index} to={GENERATE_BANK_ACCOUNT_PAGE_URL('debit',account.bankAccount.id)}>
           <AccountItem 
             id={account.bankAccount.id}
             currencyType={account.bankAccount.currencyType}
