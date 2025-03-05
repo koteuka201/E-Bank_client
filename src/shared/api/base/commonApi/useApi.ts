@@ -5,29 +5,31 @@ import { ApiTagsEnum } from "@shared/api"
 import { AxiosRequestConfig } from "axios"
 
 
-export const useApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: Record<string, any>) => {
+export const useApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: Record<string, any>, id?: string) => {
   return useQuery<R>({
     queryKey: key,
     queryFn: async () => {
-      const response = await api.get<R>(url, { params })
+      const fullUrl = id ? `${url}/${id}` : url
+      const response = await api.get<R>(fullUrl, { params })
       return response.data
     },
   })
 }
 
 export const useApiMutation = <TData = unknown, TResponse = any>(
-  { url, method, invalidateTags }: MutationOptions
+  { url, method, invalidateTags, params, id, urlAfter }: MutationOptions
 ) => {
   const queryClient = useQueryClient()
 
+  const fullUrl = id ? (urlAfter ? `${url}/${id}/${urlAfter}` : `${url}/${id}`) : url
   return useMutation<TResponse, Error, { data: TData; headers?: any; params?: Record<string, any> }>({
-    mutationFn: async ({ data, headers, params }) => {
+    mutationFn: async ({ data, headers, params: mutationParams  }) => {
       const config: AxiosRequestConfig<TData> = {
-        url,
+        url: fullUrl,
         method,
         data,
         headers,
-        params,
+        params: {...params, ...mutationParams},
       }
       const response = await api(config)
       return response.data

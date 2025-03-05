@@ -65,7 +65,7 @@ export const AccountItem=({
         <div className="text-lg font-semibold">{balance} {currencySign}</div>
         <div className="text-[16px] font-medium">
           {accountName}
-          {isFrozen===true && <span className="text-blue-500"> (заморожен)</span>}
+          {isFrozen===true && <span className="text-red"> (закрыт)</span>}
         </div>
         <div className="text-[16px] font-medium">{cardNumber}</div>
       </div>

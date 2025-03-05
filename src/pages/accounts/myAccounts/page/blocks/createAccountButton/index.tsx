@@ -57,7 +57,7 @@ export const CreateAccountButton=()=>{
                 />
               )}
             />
-            {errors.currencyType && <span className="text-red-500 text-sm">{errors.currencyType.message}</span>}
+            {errors.currencyType && <span className="text-red text-sm">{errors.currencyType.message}</span>}
           </div>
           <div>
             <Label htmlFor="accountName">
@@ -77,7 +77,7 @@ export const CreateAccountButton=()=>{
                 />
               )}
             />
-            {errors.accountName && <span className="text-red-500 text-sm">{errors.accountName.message}</span>}
+            {errors.accountName && <span className="text-red text-sm">{errors.accountName.message}</span>}
           </div>
           <DialogFooter className="mt-4">
             <Button type="button" variant={'gray'} onClick={handleClose}>

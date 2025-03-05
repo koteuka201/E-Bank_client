@@ -17,7 +17,9 @@ export default {
   			padding: '1rem'
   		},
   		colors: {
+				red: '#fb2c36',
 				main: '#22c55e',
+				bgMain: '#f1f1f1',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
