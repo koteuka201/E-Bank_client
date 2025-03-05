@@ -26,7 +26,7 @@ export const WithdrawAccountButton=({accountId, balance}: WithdrawAccountButtonP
   const onSubmit: SubmitHandler<PaymentAccountBody>=useCallback((data)=>{
     if(data.money==undefined || data.currencyType==undefined || data.money>balance) return
     withdraw({data}, {onSuccess: onClose})
-  },[])
+  },[withdraw, onClose, balance])
 
   return(
     <Dialog open={isOpen} onOpenChange={handleClose}>

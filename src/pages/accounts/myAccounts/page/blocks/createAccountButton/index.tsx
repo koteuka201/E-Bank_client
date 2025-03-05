@@ -21,7 +21,7 @@ export const CreateAccountButton=()=>{
   const onSubmit: SubmitHandler<CreateAccountBody>=useCallback((data)=>{
     if(data.accountName==undefined || data.currencyType==undefined) return
     createAccount({data}, {onSuccess: onClose})
-  },[])
+  },[createAccount, onClose])
 
   return(
     <Dialog open={isOpen} onOpenChange={handleClose}>

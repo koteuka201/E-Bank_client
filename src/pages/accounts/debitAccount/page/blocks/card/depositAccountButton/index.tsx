@@ -25,7 +25,7 @@ export const DepositAccountButton=({accountId}: DepositAccountButtonProps)=>{
   const onSubmit: SubmitHandler<PaymentAccountBody>=useCallback((data)=>{
     if(data.money==undefined || data.currencyType==undefined) return
     deposit({data}, {onSuccess: onClose})
-  },[])
+  },[deposit, onClose])
 
   return(
     <Dialog open={isOpen} onOpenChange={handleClose}>
