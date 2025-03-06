@@ -55,7 +55,7 @@ export const PaymentItem=({
   const operationTypeIcon=useMemo(()=>{
     switch(bankAccountOperationType){
       case BankAccountOperationType.LoanRepayment:
-        return <IconCircle icon={<Landmark size={20} />} color={iconColor} />
+        return <IconCircle icon={<Landmark size={20} strokeWidth={1.5} />} color={iconColor} />
       case BankAccountOperationType.Replenishment:
         return <IconCircle icon={<ArrowBigLeft fill="white" strokeWidth={0} size={26} />} color={iconColor} />
       case BankAccountOperationType.Withdrawal:

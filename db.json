@@ -149,6 +149,17 @@
       "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
     },
     {
+      "bankAccountOperationType": "Withdrawal",
+      "operatingMoney": 21313,
+      "currentBalance": 553354,
+      "previousBalance": 1421,
+      "operationDateTime": "2025-03-06T14:33:27.792Z",
+      "bankAccountOperationInitiator": "Other",
+      "bankAccountOperationStatus": "Success",
+      "bankAccountId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    },
+    {
       "bankAccountOperationType": "LoanRepayment",
       "operatingMoney": 124,
       "currentBalance": 4353,
