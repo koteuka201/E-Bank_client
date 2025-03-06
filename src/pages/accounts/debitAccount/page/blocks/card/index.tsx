@@ -8,6 +8,8 @@ import { RectangleHorizontal } from "lucide-react"
 import { DepositAccountButton } from "./depositAccountButton"
 import { WithdrawAccountButton } from "./withdrawAccountButton"
 import { Button } from "@shared/components"
+import { GENERATE_BANK_ACCOUNT_PAYMENTS_HISTORY_PAGE_URL } from "@shared/config"
+import { Link } from "react-router-dom"
 
 export type CardBlockProps={
   readonly id: string
@@ -69,11 +71,11 @@ export const CardBlock=({
           </div>
         }
       </div>
-      <div className="grid mt-4 w-100 mx-2">
-      <Button variant={'main'}>
-        Перейти к истории операций
-      </Button>
-      </div>
+      <Link className="grid mt-4 w-100 mx-2" to={GENERATE_BANK_ACCOUNT_PAYMENTS_HISTORY_PAGE_URL(id)}>
+        <Button variant={'main'}>
+          Перейти к истории операций
+        </Button>
+      </Link>
     </CommonCard>
   )
 }

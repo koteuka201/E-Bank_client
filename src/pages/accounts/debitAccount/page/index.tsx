@@ -29,7 +29,6 @@ export const DebitAccountDetailsPage=()=>{
         cardNumber={data.card.cardNumber}
         cardCategory={data.card.cardCategory}
       />
-      к уведомлениям
     </>
   )
 }
