@@ -33,7 +33,7 @@ export const List=()=>{
       <AccordionItem value="item-2">
         <AccordionTrigger>Кредитные продукты</AccordionTrigger>
         <AccordionContent>
-          скоро
+          В разработке
         </AccordionContent>
       </AccordionItem>
       </Accordion>

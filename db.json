@@ -113,6 +113,51 @@
         "cardType": "DebitCard"
       }
     }
-    
+  ],
+  "paymentsHistory":[
+    {
+      "bankAccountOperationType": "Withdrawal",
+      "operatingMoney": 1050,
+      "currentBalance": 500,
+      "previousBalance": 500,
+      "operationDateTime": "2025-03-06T14:33:27.792Z",
+      "bankAccountOperationInitiator": "System",
+      "bankAccountOperationStatus": "Reject",
+      "bankAccountId": "3fa85f64-5717-4562-b3fc-2c963f66afa5",
+      "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    },
+    {
+      "bankAccountOperationType": "Replenishment",
+      "operatingMoney": 1042,
+      "currentBalance": 2304,
+      "previousBalance": 1258,
+      "operationDateTime": "2025-03-06T14:33:27.792Z",
+      "bankAccountOperationInitiator": "User",
+      "bankAccountOperationStatus": "Success",
+      "bankAccountId": "3fa85f64-5717-4562-b3fc-2c963f66afa5",
+      "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    },
+    {
+      "bankAccountOperationType": "Replenishment",
+      "operatingMoney": 21313,
+      "currentBalance": 553354,
+      "previousBalance": 1421,
+      "operationDateTime": "2025-03-06T14:33:27.792Z",
+      "bankAccountOperationInitiator": "User",
+      "bankAccountOperationStatus": "Success",
+      "bankAccountId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    },
+    {
+      "bankAccountOperationType": "LoanRepayment",
+      "operatingMoney": 124,
+      "currentBalance": 4353,
+      "previousBalance": 34636,
+      "operationDateTime": "2025-03-06T14:33:27.792Z",
+      "bankAccountOperationInitiator": "User",
+      "bankAccountOperationStatus": "Success",
+      "bankAccountId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    }
   ]
 }

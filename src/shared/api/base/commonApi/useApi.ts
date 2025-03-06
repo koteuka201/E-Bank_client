@@ -3,6 +3,7 @@ import { api } from "./api"
 import { MutationOptions } from "../mutationOptionsType"
 import { ApiTagsEnum } from "@shared/api"
 import { AxiosRequestConfig } from "axios"
+import qs from 'qs'
 
 
 export const useApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: Record<string, any>, id?: string) => {
@@ -10,7 +11,9 @@ export const useApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: Record<
     queryKey: key,
     queryFn: async () => {
       const fullUrl = id ? `${url}/${id}` : url
-      const response = await api.get<R>(fullUrl, { params })
+      const response = await api.get<R>(fullUrl, { params,
+        paramsSerializer: params => qs.stringify(params, { arrayFormat: 'repeat' }) 
+       })
       return response.data
     },
   })

@@ -32,6 +32,19 @@ server.get('/Core/account/card/:id', (req, res) => {
     return res.status(404).json({ error: 'Account details not found' })
   }
 })
+server.get('/Core/accounts/history', (req, res) => {
+  const db = router.db
+  const { BankAccountsIds } = req.query
+
+  if (!BankAccountsIds) {
+    return res.status(400).json({ error: 'BankAccountsIds query parameter is required' })
+  }
+
+  const paymentsHistory = db.get('paymentsHistory').value()
+  const filteredHistory = paymentsHistory.filter(payment => payment.bankAccountId === BankAccountsIds)
+
+  res.json(filteredHistory)
+})
 server.use(router)
 
 server.listen(3000, () => {
