@@ -7,6 +7,7 @@ import { useMemo } from "react"
 import { RectangleHorizontal } from "lucide-react"
 import { DepositAccountButton } from "./depositAccountButton"
 import { WithdrawAccountButton } from "./withdrawAccountButton"
+import { Button } from "@shared/components"
 
 export type CardBlockProps={
   readonly id: string
@@ -61,10 +62,17 @@ export const CardBlock=({
           <RectangleHorizontal size={40} strokeWidth={0.5} fill={cardFill} />
           <span className="font-bold text-[25px]">{balance} {currencySign}</span>
         </div>
-        <div className="flex gap-2">
-          <WithdrawAccountButton accountId={id} balance={balance} />
-          <DepositAccountButton accountId={id} />
-        </div>
+        {isFrozen===false &&
+          <div className="flex gap-2">
+            <WithdrawAccountButton accountId={id} balance={balance} />
+            <DepositAccountButton accountId={id} />
+          </div>
+        }
+      </div>
+      <div className="grid mt-4 w-100 mx-2">
+      <Button variant={'main'}>
+        Перейти к истории операций
+      </Button>
       </div>
     </CommonCard>
   )

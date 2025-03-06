@@ -25,9 +25,9 @@ export const CreateAccountButton=()=>{
 
   return(
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <div className="grid grid-cols-12 mt-4" onClick={handleOpen}>
+      <div className="grid grid-cols-12 mt-4">
         <div className="col-span-3">
-          <CommonCard className="p-3 cursor-pointer">
+          <CommonCard className="p-3 cursor-pointer" onClick={handleOpen}>
             <CirclePlus strokeWidth={1.5} size={28} />
             <div className="mt-[25px] font-semibold text-lg">Оформить</div>
             <div className="text-sm text-gray-600 font-semibold">счёт</div>

@@ -13,7 +13,7 @@ export const CloseAccountButton=({accountId}:CloseAccountButtonProps)=>{
   
   return(
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <Button type="button" variant={'destructive'} onClick={handleOpen}>
+      <Button className="text-sm" size={'sm'} type="button" variant={'destructive'} onClick={handleOpen}>
         Закрыть счёт
       </Button>
       <DialogContent>
