@@ -4,15 +4,12 @@ import { Route, Routes } from "react-router-dom"
 import { AccountsRouting } from "./accounts"
 import { NotFoundRouting } from "./notFound"
 import { CreditsRouting } from "./credits"
+import { WellcomePageRouting } from "./wellcome"
 
 export const Routing=()=>{
   const testcreditRouting= 
   <Route >
     <Route path={CREDITS_CATALOG_PAGE_URL} element={<div>credit</div>}/>
-  </Route>
-  const testwellRouting= 
-  <Route >
-    <Route path={WELCOME_PAGE_URL} element={<h2>well</h2>}/>
   </Route>
 
   return(
@@ -22,10 +19,10 @@ export const Routing=()=>{
           <PrivateLayout  />
         }
       >
+        {WellcomePageRouting}
         {CreditsRouting}
         {NotFoundRouting}
         {AccountsRouting}
-        {testwellRouting}
         {testcreditRouting}
       </Route>
     </Routes>
