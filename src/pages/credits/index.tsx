@@ -1,6 +1,7 @@
 import { Route } from "react-router-dom";
 import { MyCreditsRouting } from "./myCredits";
 import { CreditDetailsRouting } from "./creditDetails";
+import { CreditsCatalogRouting } from "./creditsCatalog";
 
 export const CreditsRouting=(
   <>
@@ -8,6 +9,7 @@ export const CreditsRouting=(
       path="credits"
     >
       {MyCreditsRouting}
+      {CreditsCatalogRouting}
     </Route>
     <Route
       path="credit"

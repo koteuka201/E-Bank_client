@@ -70,6 +70,17 @@ server.get('/credit/Credit/:id/details', (req, res) => {
     return res.status(404).json({ error: 'Account details not found' })
   }
 })
+server.get('/credit/Credit/GetAllTariffs', (req, res) => {
+  const db = router.db
+
+  const credits = db.get('creditCatalog')
+
+  if (credits) {
+    return res.json(credits)
+  } else {
+    return res.status(404).json({ error: 'Account details not found' })
+  }
+})
 server.use(router)
 
 server.listen(3000, () => {

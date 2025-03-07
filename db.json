@@ -282,5 +282,23 @@
       "payingCardId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       "creditCardId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
     }
+  ],
+  "creditCatalog": [
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa0",
+      "name": "Даб даб кредит",
+      "interestRate": 21,
+      "creditLimit": 1400000,
+      "minimumPayment": 100,
+      "paymentType": "Ежедневный"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa1",
+      "name": "Xche cuds кредит",
+      "interestRate": 41,
+      "creditLimit": 2400000,
+      "minimumPayment": 400,
+      "paymentType": "Ежедневный"
+    }
   ]
 }

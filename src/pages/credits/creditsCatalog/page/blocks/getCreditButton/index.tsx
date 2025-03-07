@@ -1,42 +1,47 @@
-import { CirclePlus } from "lucide-react"
-import { CommonCard } from "@shared/ui"
+import { GetCreditForm, useCreateCreditTariff } from "@features/credits"
 import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
+import { useSwitch } from "@shared/lib"
 import { useCallback } from "react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import { CreateAccountBody, useCreateAccount } from "@features/accounts"
-import { useSwitch } from "@shared/lib"
 
-export const CreateAccountButton=()=>{
+export type GetCreditButtonProps={
+  readonly id: string
+  readonly creditLimit: number
+}
 
-  const {control, handleSubmit, reset, formState: {errors}}=useForm<CreateAccountBody>()
-  const {mutate: createAccount}=useCreateAccount()
+export const GetCreditButton=({id,creditLimit}:GetCreditButtonProps)=>{
+  
+  const {control, handleSubmit, reset, formState: {errors}}=useForm<GetCreditForm>()
+  const {mutate: getCredit}=useCreateCreditTariff()
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
-
+  
   const onClose=useCallback(()=>{
     reset()
     handleClose()
   },[reset, handleClose])
 
-  const onSubmit: SubmitHandler<CreateAccountBody>=useCallback((data)=>{
-    if(data.accountName==undefined || data.currencyType==undefined) return
-    createAccount({data}, {onSuccess: onClose})
-  },[createAccount, onClose])
+  const onSubmit: SubmitHandler<GetCreditForm>=useCallback((data)=>{
+    if(data.amount==undefined || data.currencyType==undefined || data.amount>creditLimit) return
+    getCredit({
+      data: {
+        userId: '1',
+        tariffId: id,
+        accountName: '',
+        amount: data.amount,
+        currencyType: data.currencyType
+      }
+    }, { onSuccess: onClose })
+  },[getCredit, onClose, creditLimit])
 
   return(
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <div className="grid grid-cols-12 mt-4">
-        <div className="col-span-3">
-          <CommonCard className="p-3 cursor-pointer" onClick={handleOpen}>
-            <CirclePlus strokeWidth={1.5} size={28} />
-            <div className="mt-[25px] font-semibold text-lg">Оформить</div>
-            <div className="text-sm text-gray-600 font-semibold">счёт</div>
-          </CommonCard>
-        </div>
-      </div>
+      <Button className='text-[14px]' onClick={handleOpen} size={"sm"} type="button" variant={"main"} >Оформить кредит</Button>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Создание нового счёта</DialogTitle>
+          <DialogTitle>
+            Оформление кредита
+          </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-2">
           <div>
@@ -60,24 +65,28 @@ export const CreateAccountButton=()=>{
             {errors.currencyType && <span className="text-red text-sm">{errors.currencyType.message}</span>}
           </div>
           <div>
-            <Label htmlFor="accountName">
-              Название счёта
+            <Label htmlFor="amount">
+              Сумма кредита
             </Label>
             <Controller 
-              defaultValue=""
-              name="accountName"
+              defaultValue={0}
+              name="amount"
               control={control}
-              rules={{required: "Это обязательное поле"}}
+              rules={{
+                required: "Это обязательное поле",
+                min: { value: 1, message: "минимальная сумма 1"},
+                validate: value => value <= creditLimit || "Превышен кредитный лимит"
+              }}
               render={({field})=>(
                 <Input 
                   {...field}
-                  id="accountName"
-                  type="text"
-                  placeholder="Введите название счёта"
+                  id="amount"
+                  type="number"
+                  placeholder="Введите сумму кредита"
                 />
               )}
             />
-            {errors.accountName && <span className="text-red text-sm">{errors.accountName.message}</span>}
+            {errors.amount && <span className="text-red text-sm">{errors.amount.message}</span>}
           </div>
           <DialogFooter className="mt-4">
             <Button type="button" variant={'gray'} onClick={handleClose}>
