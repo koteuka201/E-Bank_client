@@ -3,6 +3,7 @@ import { PrivateLayout } from "@shared/ui"
 import { Route, Routes } from "react-router-dom"
 import { AccountsRouting } from "./accounts"
 import { NotFoundRouting } from "./notFound"
+import { CreditsRouting } from "./credits"
 
 export const Routing=()=>{
   const testcreditRouting= 
@@ -21,6 +22,7 @@ export const Routing=()=>{
           <PrivateLayout  />
         }
       >
+        {CreditsRouting}
         {NotFoundRouting}
         {AccountsRouting}
         {testwellRouting}

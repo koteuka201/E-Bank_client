@@ -6,11 +6,11 @@ import { AxiosRequestConfig } from "axios"
 import qs from 'qs'
 
 
-export const useCreditApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: Record<string, any>, id?: string) => {
+export const useCreditApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: Record<string, any>, id?: string, urlAfter?: string) => {
   return useQuery<R>({
     queryKey: key,
     queryFn: async () => {
-      const fullUrl = id ? `${url}/${id}` : url
+      const fullUrl = id ? (urlAfter ? `${url}/${id}/${urlAfter}` : `${url}/${id}`) : url
       const response = await api.get<R>(fullUrl, { params,
         paramsSerializer: params => qs.stringify(params, { arrayFormat: 'repeat' }) 
        })

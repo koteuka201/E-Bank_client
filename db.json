@@ -170,5 +170,96 @@
       "bankAccountId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
     }
+  ],
+  "credits": [
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "isFrozen": true,
+      "currencyType": "string",
+      "balance": 12345,
+      "debt": 100000,
+      "bankAccountType": "string",
+      "ownerId": "1",
+      "tariff": {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "name": "Управляй процентом",
+        "interestRate": 31,
+        "paymentType": "Ежедевный"
+      }
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa7",
+      "isFrozen": false,
+      "currencyType": "string",
+      "balance": 234230,
+      "debt": 300000,
+      "bankAccountType": "string",
+      "ownerId": "1",
+      "tariff": {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "name": "Свободный кредит",
+        "interestRate": 24,
+        "paymentType": "Ежедевный"
+      }
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa8",
+      "isFrozen": false,
+      "currencyType": "string",
+      "balance": 12440,
+      "debt": 100000,
+      "bankAccountType": "string",
+      "ownerId": "1",
+      "tariff": {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "name": "Потребительский кредит",
+        "interestRate": 21,
+        "paymentType": "Ежемесячный"
+      }
+    }
+  ],
+  "creditDetails":[
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "createDateTime": "2025-03-07T12:06:27.249Z",
+      "isFrozen": true,
+      "currencyType": "string",
+      "accountNumber": "string",
+      "balance": 0,
+      "debt": 0,
+      "bankAccountType": "string",
+      "ownerId": "string",
+      "tariff": {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "name": "string",
+        "interestRate": 0,
+        "creditLimit": 0,
+        "minimumPayment": 0,
+        "paymentType": "string"
+      },
+      "payingCardId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "creditCardId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa7",
+      "createDateTime": "2025-03-07T12:06:27.249Z",
+      "isFrozen": true,
+      "currencyType": "string",
+      "accountNumber": "string",
+      "balance": 0,
+      "debt": 0,
+      "bankAccountType": "string",
+      "ownerId": "string",
+      "tariff": {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "name": "string",
+        "interestRate": 0,
+        "creditLimit": 0,
+        "minimumPayment": 0,
+        "paymentType": "string"
+      },
+      "payingCardId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "creditCardId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    }
   ]
 }

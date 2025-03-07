@@ -45,6 +45,31 @@ server.get('/Core/accounts/history', (req, res) => {
 
   res.json(filteredHistory)
 })
+server.get('/credit/Credit/:id/GetAllCredits', (req, res) => {
+  const db = router.db
+  const { id } = req.params
+
+  if (!id) {
+    return res.status(400).json({ error: 'id query parameter is required' })
+  }
+
+  const credits = db.get('credits').value()
+  const filteredCredits = credits.filter(credit => credit.ownerId === id)
+
+  res.json(filteredCredits)
+})
+server.get('/credit/Credit/:id/details', (req, res) => {
+  const db = router.db
+  const { id } = req.params
+
+  const creditDetails = db.get('creditDetails').find({ id }).value()
+
+  if (creditDetails) {
+    return res.json(creditDetails)
+  } else {
+    return res.status(404).json({ error: 'Account details not found' })
+  }
+})
 server.use(router)
 
 server.listen(3000, () => {

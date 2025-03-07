@@ -3,9 +3,13 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@s
 import { CommonCard, Spinner } from "@shared/ui"
 import { BankAccountsRenderer } from "../bankAccountsRenderer"
 
-export const List=()=>{
+export type ListProps={
+  readonly id: string
+}
+
+export const List=({id}:ListProps)=>{
   
-  const {data, isError, isLoading, isFetching}=useGetMyAccounts({userId: '1'})
+  const {data, isError, isLoading, isFetching}=useGetMyAccounts({userId: id})
 
   if(isLoading || isFetching){
     return(
