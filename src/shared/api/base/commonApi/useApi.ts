@@ -8,7 +8,7 @@ import qs from 'qs'
 
 export const useApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: Record<string, any>, id?: string) => {
   return useQuery<R>({
-    queryKey: key,
+    queryKey: [key, url, id, params],
     queryFn: async () => {
       const fullUrl = id ? `${url}/${id}` : url
       const response = await api.get<R>(fullUrl, { params,
@@ -16,6 +16,7 @@ export const useApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: Record<
        })
       return response.data
     },
+    staleTime: 600000
   })
 }
 

@@ -8,7 +8,7 @@ import qs from 'qs'
 
 export const useCreditApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: Record<string, any>, id?: string, urlAfter?: string) => {
   return useQuery<R>({
-    queryKey: key,
+    queryKey: [key,url, id, params, urlAfter],
     queryFn: async () => {
       const fullUrl = id ? (urlAfter ? `${url}/${id}/${urlAfter}` : `${url}/${id}`) : url
       const response = await api.get<R>(fullUrl, { params,
@@ -16,6 +16,7 @@ export const useCreditApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: R
        })
       return response.data
     },
+    staleTime: 600000
   })
 }
 

@@ -1,18 +1,20 @@
 import { useCallback } from "react"
-import { PaymentAccountBody, PaymentButton, useDepositAccount } from "@features/accounts"
+import { PaymentButton } from "@features/accounts"
 import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
 import { useSwitch } from "@shared/lib"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import { CircleFadingPlus } from "lucide-react"
+import { CircleArrowRight } from "lucide-react"
+import { PaymentCreditBody, useDepositCredit } from "@features/credits"
 
-export type DepositAccountButtonProps={
-  readonly accountId: string
+export type WithdrawCreditButtonProps={
+  readonly creditId: string
+  readonly balance: number
 }
 
-export const DepositAccountButton=({accountId}: DepositAccountButtonProps)=>{
+export const WithdrawCreditButton=({creditId, balance}: WithdrawCreditButtonProps)=>{
   
-  const {control, handleSubmit, reset, formState: {errors}}=useForm<PaymentAccountBody>()
-  const {mutate: deposit}=useDepositAccount({accountId})
+  const {control, handleSubmit, reset, formState: {errors}}=useForm<PaymentCreditBody>()
+  const {mutate: withdraw}=useDepositCredit({creditId: creditId})
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
   
@@ -21,18 +23,18 @@ export const DepositAccountButton=({accountId}: DepositAccountButtonProps)=>{
     handleClose()
   },[reset, handleClose])
 
-  const onSubmit: SubmitHandler<PaymentAccountBody>=useCallback((data)=>{
-    if(data.money==undefined || data.currencyType==undefined) return
-    deposit({data}, {onSuccess: onClose})
-  },[deposit, onClose])
+  const onSubmit: SubmitHandler<PaymentCreditBody>=useCallback((data)=>{
+    if(data.money==undefined || data.currencyType==undefined || data.money>balance) return
+    withdraw({data}, {onSuccess: onClose})
+  },[withdraw, onClose, balance])
 
   return(
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <PaymentButton onClick={handleOpen} icon={<CircleFadingPlus size={28} />} text="Пополнить, счёт карты" />
+      <PaymentButton onClick={handleOpen} icon={<CircleArrowRight size={28} />} text="Снять, с кредитного счёта" />
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            Пополнение счёта
+            Снятие с кредитного счёта
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-2">
@@ -67,6 +69,7 @@ export const DepositAccountButton=({accountId}: DepositAccountButtonProps)=>{
               rules={{
                 required: "Это обязательное поле",
                 min: { value: 1, message: "минимальная сумма 1"},
+                validate: value => value <= balance || "Недостаточно средств"
               }}
               render={({field})=>(
                 <Input 
@@ -84,7 +87,7 @@ export const DepositAccountButton=({accountId}: DepositAccountButtonProps)=>{
               Отмена
             </Button>
             <Button type="submit" variant={'main'}>
-              Пополнить
+              Снять
             </Button>
           </DialogFooter>
         </form>

@@ -23,7 +23,6 @@ export const BankAccountsRenderer=({accounts}:BankAccountsRendererProps)=>{
     return(
       <div className="text-center font-semibold text-lg">
         У вас еще нет ни одного открытого продукта в этой категории.
-        <span className="underline text-blue-400 cursor-pointer">Приступим?</span>
       </div>
     )
   }

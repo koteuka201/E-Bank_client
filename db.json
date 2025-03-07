@@ -224,6 +224,27 @@
       "createDateTime": "2025-03-07T12:06:27.249Z",
       "isFrozen": true,
       "currencyType": "string",
+      "accountNumber": "2342 2344 2562 2468",
+      "balance": 124124,
+      "debt": 534534,
+      "bankAccountType": "string",
+      "ownerId": "string",
+      "tariff": {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "name": "Управляй процентом",
+        "interestRate": 21,
+        "creditLimit": 1000000,
+        "minimumPayment": 1500,
+        "paymentType": "Ежедевный"
+      },
+      "payingCardId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "creditCardId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa7",
+      "createDateTime": "2025-03-07T12:06:27.249Z",
+      "isFrozen": false,
+      "currencyType": "string",
       "accountNumber": "string",
       "balance": 0,
       "debt": 0,
@@ -241,9 +262,9 @@
       "creditCardId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
     },
     {
-      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa7",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa8",
       "createDateTime": "2025-03-07T12:06:27.249Z",
-      "isFrozen": true,
+      "isFrozen": false,
       "currencyType": "string",
       "accountNumber": "string",
       "balance": 0,

@@ -30,10 +30,10 @@ export const CreditItem=({
         <span>Ставка: {tariff.interestRate}%</span>
       </div>
       <div className="flex justify-between mt-4">
-        <span>Остаток долга {debt} {currencySign}</span>
+        <span>Остаток долга: {debt} {currencySign}</span>
         <span>{tariff.paymentType} платеж</span>
       </div>
-      <div>Баланс кредита {balance} {currencySign}</div>
+      <div>Баланс: {balance} {currencySign}</div>
 
     </div>
   )

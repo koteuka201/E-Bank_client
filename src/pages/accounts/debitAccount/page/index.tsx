@@ -13,7 +13,10 @@ export const DebitAccountDetailsPage=()=>{
   
   if(data==undefined){
     return(
-      <div className="text-center font-semibold text-lg mt-10">Не удалось загрузить ваш счёт. Перезагрузите страницу или попробуйте позже!</div>
+      <>
+        <GoBackButton />
+        <div className="text-center font-semibold text-lg mt-10">Не удалось загрузить ваш счёт. Перезагрузите страницу или попробуйте позже!</div>
+      </>
     )
   }
 

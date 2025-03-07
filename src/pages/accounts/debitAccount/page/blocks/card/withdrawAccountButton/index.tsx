@@ -1,9 +1,8 @@
 import { useCallback } from "react"
-import { PaymentAccountBody, useWithdrawAccount } from "@features/accounts"
+import { PaymentAccountBody, PaymentButton, useWithdrawAccount } from "@features/accounts"
 import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
 import { useSwitch } from "@shared/lib"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import { PaymentButton } from "../paymentButton"
 import { CircleArrowRight } from "lucide-react"
 
 export type WithdrawAccountButtonProps={

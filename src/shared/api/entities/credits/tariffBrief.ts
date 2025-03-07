@@ -4,3 +4,8 @@ export type TariffBrief={
   interestRate: number
   paymentType: string
 }
+
+export type TariffInfo={
+  creditLimit: number
+  minimumPayment: number
+} & TariffBrief

@@ -1,18 +1,19 @@
 import { useCallback } from "react"
-import { PaymentAccountBody, PaymentButton, useDepositAccount } from "@features/accounts"
+import { PaymentButton } from "@features/accounts"
 import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
 import { useSwitch } from "@shared/lib"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { CircleFadingPlus } from "lucide-react"
+import { PaymentCreditBody, useDepositCredit } from "@features/credits"
 
-export type DepositAccountButtonProps={
-  readonly accountId: string
+export type DepositCreditButtonProps={
+  readonly creditId: string
 }
 
-export const DepositAccountButton=({accountId}: DepositAccountButtonProps)=>{
+export const DepositCreditButton=({creditId}: DepositCreditButtonProps)=>{
   
-  const {control, handleSubmit, reset, formState: {errors}}=useForm<PaymentAccountBody>()
-  const {mutate: deposit}=useDepositAccount({accountId})
+  const {control, handleSubmit, reset, formState: {errors}}=useForm<PaymentCreditBody>()
+  const {mutate: deposit}=useDepositCredit({creditId: creditId})
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
   
@@ -21,18 +22,18 @@ export const DepositAccountButton=({accountId}: DepositAccountButtonProps)=>{
     handleClose()
   },[reset, handleClose])
 
-  const onSubmit: SubmitHandler<PaymentAccountBody>=useCallback((data)=>{
+  const onSubmit: SubmitHandler<PaymentCreditBody>=useCallback((data)=>{
     if(data.money==undefined || data.currencyType==undefined) return
     deposit({data}, {onSuccess: onClose})
   },[deposit, onClose])
 
   return(
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <PaymentButton onClick={handleOpen} icon={<CircleFadingPlus size={28} />} text="Пополнить, счёт карты" />
+      <PaymentButton onClick={handleOpen} icon={<CircleFadingPlus size={28} />} text="Пополнить, кредитный счёт" />
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            Пополнение счёта
+            
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-2">
