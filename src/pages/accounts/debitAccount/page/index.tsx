@@ -3,14 +3,23 @@ import { GoBackButton } from "@widgets/goBackButton"
 import { Navigate, useParams } from "react-router-dom"
 import { CardBlock } from "./blocks"
 import { MY_BANK_ACCOUNTS_PAGE_URL } from "@shared/config"
+import { Spinner } from "@shared/ui"
 
 export const DebitAccountDetailsPage=()=>{
   const {id}=useParams<{id:string}>()
 
   if(!id) return <Navigate to={MY_BANK_ACCOUNTS_PAGE_URL} />
 
-  const {data}=useGetDebitAccountDetails({accountId: id})
+  const {data, isLoading, isFetching}=useGetDebitAccountDetails({accountId: id})
   
+  if(isLoading || isFetching){
+    return(
+      <div className="flex justify-center mt-10">
+        <Spinner />
+      </div>
+    )
+  }
+
   if(data==undefined){
     return(
       <>
