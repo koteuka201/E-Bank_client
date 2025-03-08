@@ -30,7 +30,7 @@ export const PaymentItem=({
     if(!operationDateTime) return
 
     return formatDateToRussian(operationDateTime)
-  },[operationDateTime, formatDateToRussian])
+  },[operationDateTime])
 
   const iconColor=useMemo(()=>{
     switch(bankAccountOperationStatus){
@@ -61,7 +61,7 @@ export const PaymentItem=({
       case BankAccountOperationType.Withdrawal:
         return <IconCircle icon={<ArrowBigRight fill="white" strokeWidth={0} size={26} />} color={iconColor} />
     }
-  },[bankAccountOperationType])
+  },[iconColor,bankAccountOperationType])
 
   const operationTypeText=useMemo(()=>{
     switch(bankAccountOperationType){
@@ -105,7 +105,7 @@ export const PaymentItem=({
       case BankAccountOperationStatus.Reject:
         return ''
     }
-  },[bankAccountOperationStatus])
+  },[bankAccountOperationStatus, previousBalance, currentBalance])
 
   return(
     <div className="border rounded-md p-3">

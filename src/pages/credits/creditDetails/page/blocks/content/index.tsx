@@ -41,7 +41,7 @@ export const Content=({
 
   const dateText=useMemo(()=>{
     return formatDateToRussian(createDateTime, true)
-  },[createDateTime, formatDateToRussian])
+  },[createDateTime])
 
   return(
     <CommonCard className="p-4 pb-3 mt-6 font-semibold ">

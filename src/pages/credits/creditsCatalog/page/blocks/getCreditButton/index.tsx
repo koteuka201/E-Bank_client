@@ -32,7 +32,7 @@ export const GetCreditButton=({id,creditLimit}:GetCreditButtonProps)=>{
         currencyType: data.currencyType
       }
     }, { onSuccess: onClose })
-  },[getCredit, onClose, creditLimit])
+  },[id, getCredit, onClose, creditLimit])
 
   return(
     <Dialog open={isOpen} onOpenChange={handleClose}>
