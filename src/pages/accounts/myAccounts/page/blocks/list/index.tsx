@@ -3,13 +3,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@s
 import { CommonCard, Spinner } from "@shared/ui"
 import { BankAccountsRenderer } from "../bankAccountsRenderer"
 
-export type ListProps={
-  readonly id: string
-}
-
-export const List=({id}:ListProps)=>{
+export const List=()=>{
   
-  const {data, isError, isLoading, isFetching}=useGetMyAccounts({userId: id})
+  const {data, isError, isLoading, isFetching}=useGetMyAccounts()
 
   if(isLoading || isFetching){
     return(
@@ -19,7 +15,7 @@ export const List=({id}:ListProps)=>{
     )
   }
 
-  if(isError){
+  if(isError || data=== undefined){
     return(
       <div className="text-center font-semibold text-lg mt-10">Не удалось загрузить ваши счета. Перезагрузите страницу или попробуйте позже!</div>
     )

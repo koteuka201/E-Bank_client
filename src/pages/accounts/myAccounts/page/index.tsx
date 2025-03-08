@@ -9,7 +9,7 @@ export const MyAccounts=()=>{
         <div className="font-semibold text-2xl border-b">Кошелёк</div>
         <CreateAccountButton />
         <Suspense fallback={<Spinner />}>
-          <List id="1"/>
+          <List />
         </Suspense>
       </Container>
     </>

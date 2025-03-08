@@ -1,6 +1,7 @@
 export enum ApiTagsEnum{
   User = 'User',
   Accounts= 'Accounts',
+  MyAccounts= 'MyAccounts',
   DebitAccount= 'DebitAccount',
   Payments= 'Payments',
   MyCredits= 'MyCredits',

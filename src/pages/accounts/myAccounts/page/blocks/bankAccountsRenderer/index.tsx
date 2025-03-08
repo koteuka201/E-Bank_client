@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { GENERATE_BANK_ACCOUNT_PAGE_URL } from "@shared/config"
 
 export type BankAccountsRendererProps={
-  readonly accounts: AccountAndCard[] | undefined
+  readonly accounts: AccountAndCard[]
 }
 
 export const BankAccountsRenderer=({accounts}:BankAccountsRendererProps)=>{
