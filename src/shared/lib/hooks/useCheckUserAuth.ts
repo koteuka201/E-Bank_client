@@ -9,7 +9,7 @@ export const useCheckUserAuth=()=>{
   const isLoading=false
 
   const isAuth=useMemo(()=>{
-    if(!JWTToken) return true
+    if(!JWTToken) return false
 
     if((userData==undefined || isError) && isLoading===false) return false
 
