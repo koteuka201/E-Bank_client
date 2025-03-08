@@ -1,4 +1,4 @@
-import { COMMON_API_BASE_URL } from "@shared/config";
+import { USER_API_BASE_URL } from "@shared/config";
 import axios from "axios";
 
 export const api = axios.create({

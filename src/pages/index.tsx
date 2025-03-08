@@ -4,6 +4,7 @@ import { AccountsRouting } from "./accounts"
 import { NotFoundRouting } from "./notFound"
 import { CreditsRouting } from "./credits"
 import { WellcomePageRouting } from "./wellcome"
+import { ClientsRouting } from "./clients"
 
 export const Routing=()=>{
 
@@ -14,6 +15,7 @@ export const Routing=()=>{
           <PrivateLayout  />
         }
       >
+        {ClientsRouting}
         {WellcomePageRouting}
         {CreditsRouting}
         {NotFoundRouting}

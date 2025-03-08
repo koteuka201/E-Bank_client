@@ -2,7 +2,7 @@ import { CREDIT_API_BASE_URL } from "@shared/config";
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: CREDIT_API_BASE_URL,
+  baseURL: 'http://localhost:3000',
 })
 
 api.interceptors.request.use((config) => {

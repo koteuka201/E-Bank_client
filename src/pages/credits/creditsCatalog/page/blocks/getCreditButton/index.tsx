@@ -1,4 +1,4 @@
-import { GetCreditForm, useCreateCreditTariff } from "@features/credits"
+import { GetCreditForm, useGetCredit } from "@features/credits"
 import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
 import { useSwitch } from "@shared/lib"
 import { useCallback } from "react"
@@ -12,7 +12,7 @@ export type GetCreditButtonProps={
 export const GetCreditButton=({id,creditLimit}:GetCreditButtonProps)=>{
   
   const {control, handleSubmit, reset, formState: {errors}}=useForm<GetCreditForm>()
-  const {mutate: getCredit}=useCreateCreditTariff()
+  const {mutate: getCredit}=useGetCredit()
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
   

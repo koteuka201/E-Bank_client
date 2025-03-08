@@ -81,6 +81,19 @@ server.get('/credit/Credit/GetAllTariffs', (req, res) => {
     return res.status(404).json({ error: 'Account details not found' })
   }
 })
+server.get('/user/User/GetAllUsers', (req, res) => {
+  const db = router.db
+  const { role } = req.query
+
+  if (!role) {
+    return res.status(400).json({ error: 'role query parameter is required' })
+  }
+
+  const users = db.get('usersShort').value()
+  const clients = users.filter(user => user.role == role)
+
+  res.json(clients)
+})
 server.use(router)
 
 server.listen(3000, () => {

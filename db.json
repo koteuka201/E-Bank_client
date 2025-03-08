@@ -300,5 +300,43 @@
       "minimumPayment": 400,
       "paymentType": "Ежедневный"
     }
+  ],
+  "usersShort":[
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "userName": "string",
+      "isManuallyBlocked": true,
+      "role": "Employee"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "userName": "string",
+      "isManuallyBlocked": true,
+      "role": "Employee"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "userName": "string",
+      "isManuallyBlocked": true,
+      "role": "Employee"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "userName": "string",
+      "isManuallyBlocked": true,
+      "role": "Client"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "userName": "string",
+      "isManuallyBlocked": true,
+      "role": "Client"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "userName": "string",
+      "isManuallyBlocked": true,
+      "role": "Client"
+    }
   ]
 }
