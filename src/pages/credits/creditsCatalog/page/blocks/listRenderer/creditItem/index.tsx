@@ -1,6 +1,7 @@
 import { useMemo } from "react"
 import { GetCreditButton } from "../../getCreditButton"
-import { PaymentType } from "@shared/api"
+import { PaymentType, UserRole } from "@shared/api"
+import { useGetMyProfile } from "@entities/clients"
 
 export type CreditItemProps={
   readonly id: string
@@ -19,6 +20,8 @@ export const CreditItem=({
   creditLimit,
   minimumPayment
 }:CreditItemProps)=>{
+
+  const {data}=useGetMyProfile()
 
   const paymentTypeText=useMemo(()=>{
     switch(paymentType){
@@ -44,7 +47,7 @@ export const CreditItem=({
       </div>
         <span>Минимальный платеж: {minimumPayment} ₽</span>
       <div className="flex justify-end mt-3">
-        <GetCreditButton creditLimit={creditLimit} id={id} />
+        {data?.role===UserRole.Client && <GetCreditButton creditLimit={creditLimit} id={id} /> }
         {/* roleCheck */}
       </div>
     </div>

@@ -39,7 +39,7 @@ export const GetCreditButton=({id,creditLimit}:GetCreditButtonProps)=>{
         navigate(MY_CREDITS_PAGE_URL)
       } 
     })
-  },[id, getCredit, onClose, creditLimit])
+  },[id, getCredit, onClose, creditLimit, navigate])
 
   return(
     <Dialog open={isOpen} onOpenChange={handleClose}>

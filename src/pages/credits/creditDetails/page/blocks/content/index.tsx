@@ -4,7 +4,8 @@ import { WithdrawCreditButton } from "../withdrawCreditButton"
 import { DepositCreditButton } from "../depositCreditButton"
 import { formatDateToRussian } from "@shared/lib"
 import { CloseCreditButton } from "../closeCredit"
-import { PaymentType } from "@shared/api"
+import { PaymentType, UserRole } from "@shared/api"
+import { useGetMyProfile } from "@entities/clients"
 
 export type ContentProps={
   readonly id: string
@@ -35,6 +36,8 @@ export const Content=({
   paymentType,
   minimumPayment
 }:ContentProps)=>{
+
+  const {data}=useGetMyProfile()
 
   const currencySign=useMemo(()=>{
     if(currencyType) return '₽'
@@ -71,7 +74,7 @@ export const Content=({
         <div className="text-gray">{paymentTypeText}</div>
       </div>
       <div className="flex justify-between text-gray-400 text-sm mt-2">
-        <span>Уникальный номер кредитного счёта </span>
+        <span>Название кредитного счёта </span>
         <span>{accountNumber}</span>
       </div>
       <div className="bg-bgMain rounded-[12px] px-4 py-3 flex justify-between">
@@ -81,7 +84,7 @@ export const Content=({
           <div className="mt-2">Мин. платеж: {minimumPayment} {currencySign}</div>
         </div>
         <div className="grid">
-          {isFrozen!==true &&
+          {isFrozen!==true && data?.role===UserRole.Client &&
             <>
               <div className="flex gap-2">
                 <WithdrawCreditButton creditId={id} balance={balance} />
@@ -90,7 +93,6 @@ export const Content=({
               <CloseCreditButton canBeClosed={debt===0} creditId={id} />
             </>
           }
-          {/* roleCheck */}
         </div>
       </div>
     </CommonCard>

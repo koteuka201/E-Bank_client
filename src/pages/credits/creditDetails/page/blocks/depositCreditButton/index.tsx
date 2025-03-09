@@ -1,10 +1,10 @@
 import { useCallback } from "react"
-import { PaymentButton } from "@features/accounts"
-import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
+import { PaymentButton, useDepositCreditAccount } from "@features/accounts"
+import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@shared/components"
 import { useSwitch } from "@shared/lib"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { CircleFadingPlus } from "lucide-react"
-import { PaymentCreditBody, useDepositCredit } from "@features/credits"
+import { PaymentCreditForm, useDepositCredit } from "@features/credits"
 
 export type DepositCreditButtonProps={
   readonly creditId: string
@@ -12,8 +12,9 @@ export type DepositCreditButtonProps={
 
 export const DepositCreditButton=({creditId}: DepositCreditButtonProps)=>{
   
-  const {control, handleSubmit, reset, formState: {errors}}=useForm<PaymentCreditBody>()
+  const {control, handleSubmit, reset, formState: {errors}}=useForm<PaymentCreditForm>()
   const {mutate: deposit}=useDepositCredit({creditId: creditId})
+  const {mutate: depositFromDebit}=useDepositCreditAccount({accountId: creditId})
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
   
@@ -22,10 +23,14 @@ export const DepositCreditButton=({creditId}: DepositCreditButtonProps)=>{
     handleClose()
   },[reset, handleClose])
 
-  const onSubmit: SubmitHandler<PaymentCreditBody>=useCallback((data)=>{
+  const onSubmit: SubmitHandler<PaymentCreditForm>=useCallback((data)=>{
     if(data.money==undefined || data.currencyType==undefined) return
-    deposit({data}, {onSuccess: onClose})
-  },[deposit, onClose])
+    if(data.paymentFrom==='Credit'){
+      deposit({data}, {onSuccess: onClose})
+    } else{
+      depositFromDebit({data}, {onSuccess: onClose})
+    }
+  },[deposit, depositFromDebit, onClose])
 
   return(
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -33,10 +38,33 @@ export const DepositCreditButton=({creditId}: DepositCreditButtonProps)=>{
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            
+            Пополнение кредитного счёта
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-2">
+          <div>
+            <Label htmlFor="paymentFrom">
+              Пополнить с
+            </Label>
+            <Controller 
+              defaultValue={'DebitCard'}
+              name="paymentFrom"
+              control={control}
+              rules={{required: "Это обязательное поле"}}
+              render={({field})=>(
+                <Select onValueChange={field.onChange} {...field}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Выберите" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={'DebitCard'}>дебетового счета</SelectItem>
+                    <SelectItem value={'Credit'}>кредитного счета</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {errors.paymentFrom && <span className="text-red text-sm">{errors.paymentFrom.message}</span>}
+          </div>
           <div>
             <Label htmlFor="currencyType">
               Валюта

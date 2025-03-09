@@ -23,7 +23,7 @@ export const RegistrationPage=()=>{
       },
     }
   )
-  },[registration, navigate])
+  },[registration, navigate, reset])
 
   return(
     <div className="flex items-center justify-center min-h-screen">
@@ -89,8 +89,8 @@ export const RegistrationPage=()=>{
                       <SelectValue placeholder="Выберите роль" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value={UserRole.Client}>Сотрудник</SelectItem>
-                      <SelectItem value={UserRole.Employee}>Клиент</SelectItem>
+                      <SelectItem value={UserRole.Client}>Клиент</SelectItem>
+                      <SelectItem value={UserRole.Employee}>Сотрудник</SelectItem>
                     </SelectContent>
                   </Select>
                 )}

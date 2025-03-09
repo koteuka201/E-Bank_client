@@ -17,3 +17,4 @@ export const GENERATE_USER_DETAILS_PAGE_URL=(id: string, role: UserRole)=>{
 
 export const LOGIN_PAGE_URL = `${APP_START_URL}/login`
 export const REGISTER_PAGE_URL = `${APP_START_URL}/registration`
+export const BANNED_PAGE_URL = `${APP_START_URL}/banned`

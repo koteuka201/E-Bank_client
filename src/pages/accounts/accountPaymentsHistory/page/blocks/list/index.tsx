@@ -1,6 +1,8 @@
-import { useGetAccountsPaymentsHistory } from "@entities/accounts/paymentHistory"
+import { useGetAccountsPaymentsHistory, useGetMyAccountsPaymentsHistory } from "@entities/accounts/paymentHistory"
 import { CommonCard, Spinner } from "@shared/ui"
 import { PaymentItem } from "../paymentItem"
+import { useGetMyProfile } from "@entities/clients"
+import { UserRole } from "@shared/api"
 
 export type ListProps={
   readonly id: string
@@ -8,14 +10,27 @@ export type ListProps={
 
 export const List=({id}: ListProps)=>{
 
-  const {data, isError, isLoading, isFetching}=useGetAccountsPaymentsHistory({
-    UsersIds: undefined,
-    BankAccountsIds: [id],
-    OperationDateTime: undefined,
-    BankAccountOperationInitiator: undefined,
-    BankAccountOperationStatus: undefined,
-    BankAccountType: undefined
-  })
+  const {data: profileData}=useGetMyProfile()
+
+
+  const { data, isError, isLoading, isFetching } =
+  profileData?.role === UserRole.Client
+    ? useGetMyAccountsPaymentsHistory({
+        UsersIds: undefined,
+        BankAccountsIds: [id],
+        OperationDateTime: undefined,
+        BankAccountOperationInitiator: undefined,
+        BankAccountOperationStatus: undefined,
+        BankAccountType: undefined
+      })
+    : useGetAccountsPaymentsHistory({
+        UsersIds: undefined,
+        BankAccountsIds: [id],
+        OperationDateTime: undefined,
+        BankAccountOperationInitiator: undefined,
+        BankAccountOperationStatus: undefined,
+        BankAccountType: undefined
+      })
   
     if(isLoading || isFetching){
       return(

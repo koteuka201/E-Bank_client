@@ -8,7 +8,6 @@ export const ClientFeed=()=>{
   return(
     <>
       <Container fluid>
-        {/* roleCheck */}
         <div className="font-semibold text-2xl border-b">Клиенты банка</div>
         <CreateUserButton userRole={UserRole.Client} /> 
         <Suspense fallback={<Spinner />}>

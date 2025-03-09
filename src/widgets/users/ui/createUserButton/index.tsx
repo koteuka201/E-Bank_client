@@ -37,7 +37,7 @@ export const CreateUserButton=({userRole}:CreateUserButtonProps)=>{
         role: userRole
       }
     }, {onSuccess: onClose})
-  },[createUser, onClose])
+  },[createUser, onClose, userRole])
 
   return(
     <Dialog open={isOpen} onOpenChange={handleClose}>

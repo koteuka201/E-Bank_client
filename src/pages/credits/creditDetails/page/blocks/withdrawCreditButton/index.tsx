@@ -1,10 +1,10 @@
 import { useCallback } from "react"
-import { PaymentButton } from "@features/accounts"
-import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
+import { PaymentButton, useWithdrawCreditAccount } from "@features/accounts"
+import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@shared/components"
 import { useSwitch } from "@shared/lib"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { CircleArrowRight } from "lucide-react"
-import { PaymentCreditBody, useWithdrawCredit } from "@features/credits"
+import { PaymentCreditForm, useWithdrawCredit } from "@features/credits"
 
 export type WithdrawCreditButtonProps={
   readonly creditId: string
@@ -13,8 +13,9 @@ export type WithdrawCreditButtonProps={
 
 export const WithdrawCreditButton=({creditId, balance}: WithdrawCreditButtonProps)=>{
   
-  const {control, handleSubmit, reset, formState: {errors}}=useForm<PaymentCreditBody>()
+  const {control, handleSubmit, reset, formState: {errors}}=useForm<PaymentCreditForm>()
   const {mutate: withdraw}=useWithdrawCredit({creditId: creditId})
+  const {mutate: withdrawFromDebit}=useWithdrawCreditAccount({accountId: creditId})
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
   
@@ -23,10 +24,15 @@ export const WithdrawCreditButton=({creditId, balance}: WithdrawCreditButtonProp
     handleClose()
   },[reset, handleClose])
 
-  const onSubmit: SubmitHandler<PaymentCreditBody>=useCallback((data)=>{
+  const onSubmit: SubmitHandler<PaymentCreditForm>=useCallback((data)=>{
     if(data.money==undefined || data.currencyType==undefined || data.money>balance) return
-    withdraw({data}, {onSuccess: onClose})
-  },[withdraw, onClose, balance])
+    if(data.paymentFrom==='Credit'){
+      withdraw({data}, {onSuccess: onClose})
+    } else{
+      withdrawFromDebit({data}, {onSuccess: onClose})
+    }
+    
+  },[withdraw,withdrawFromDebit, onClose, balance])
 
   return(
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -38,6 +44,29 @@ export const WithdrawCreditButton=({creditId, balance}: WithdrawCreditButtonProp
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-2">
+          <div>
+            <Label htmlFor="paymentFrom">
+              Снять на
+            </Label>
+            <Controller 
+              defaultValue={'DebitCard'}
+              name="paymentFrom"
+              control={control}
+              rules={{required: "Это обязательное поле"}}
+              render={({field})=>(
+                <Select onValueChange={field.onChange} {...field}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Выберите" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={'DebitCard'}>дебетовый счёт</SelectItem>
+                    <SelectItem value={'Credit'}>кредитный счёт</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {errors.paymentFrom && <span className="text-red text-sm">{errors.paymentFrom.message}</span>}
+          </div>
           <div>
             <Label htmlFor="currencyType">
               Валюта
