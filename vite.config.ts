@@ -13,5 +13,27 @@ export default defineConfig({
       '@features': path.resolve(__dirname, 'src/features'),
       '@entities': path.resolve(__dirname, 'src/entities'),
     }
+  },
+  server: {
+    proxy: {
+      '/api1': {
+        target: 'http://158.160.18.15:5001',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/api1/, '')
+      },
+      '/api2': {
+        target: 'http://158.160.18.15:5002',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/api2/, '')
+      },
+      '/api3': {
+        target: 'http://158.160.18.15:5003',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/api3/, '')
+      }
+    }
   }
 })
