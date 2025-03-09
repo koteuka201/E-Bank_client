@@ -40,7 +40,7 @@ export const useApiMutation = <TData = unknown, TResponse = any>(
     },
     onSuccess: () => {
       if (invalidateTags?.length) {
-        invalidateTags.forEach(tag => queryClient.invalidateQueries({ queryKey: [tag] }))
+        invalidateTags.forEach(tag => queryClient.invalidateQueries({ queryKey: [[tag]] }))
       }
     }
   })

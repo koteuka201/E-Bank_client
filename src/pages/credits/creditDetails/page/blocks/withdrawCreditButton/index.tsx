@@ -4,7 +4,7 @@ import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle,
 import { useSwitch } from "@shared/lib"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { CircleArrowRight } from "lucide-react"
-import { PaymentCreditBody, useDepositCredit } from "@features/credits"
+import { PaymentCreditBody, useWithdrawCredit } from "@features/credits"
 
 export type WithdrawCreditButtonProps={
   readonly creditId: string
@@ -14,7 +14,7 @@ export type WithdrawCreditButtonProps={
 export const WithdrawCreditButton=({creditId, balance}: WithdrawCreditButtonProps)=>{
   
   const {control, handleSubmit, reset, formState: {errors}}=useForm<PaymentCreditBody>()
-  const {mutate: withdraw}=useDepositCredit({creditId: creditId})
+  const {mutate: withdraw}=useWithdrawCredit({creditId: creditId})
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
   
@@ -43,10 +43,15 @@ export const WithdrawCreditButton=({creditId, balance}: WithdrawCreditButtonProp
               Валюта
             </Label>
             <Controller 
-              defaultValue=""
+              defaultValue="RUB"
               name="currencyType"
               control={control}
-              rules={{required: "Это обязательное поле"}}
+              rules={{required: "Это обязательное поле",
+                pattern: {
+                  value: /^[A-Z]{1,5}$/,
+                  message: "Разрешены только латинские буквы в верхнем регистре (до 5 символов)"
+                }
+              }}
               render={({field})=>(
                 <Input 
                   {...field}

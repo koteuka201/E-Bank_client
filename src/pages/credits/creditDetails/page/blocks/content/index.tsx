@@ -4,6 +4,7 @@ import { WithdrawCreditButton } from "../withdrawCreditButton"
 import { DepositCreditButton } from "../depositCreditButton"
 import { formatDateToRussian } from "@shared/lib"
 import { CloseCreditButton } from "../closeCredit"
+import { PaymentType } from "@shared/api"
 
 export type ContentProps={
   readonly id: string
@@ -31,7 +32,8 @@ export const Content=({
   creditLimit,
   tariffName,
   interestRate,
-  paymentType
+  paymentType,
+  minimumPayment
 }:ContentProps)=>{
 
   const currencySign=useMemo(()=>{
@@ -43,6 +45,18 @@ export const Content=({
     return formatDateToRussian(createDateTime, true)
   },[createDateTime])
 
+  const paymentTypeText=useMemo(()=>{
+    switch(paymentType){
+      case PaymentType.Daily:
+        return 'Ежедневный платеж'
+      case PaymentType.Weekly:
+        return 'Еженедельный платеж'
+      case PaymentType.Monthly:
+        return 'Ежемесячный платеж'
+    }
+    return
+  },[paymentType])
+
   return(
     <CommonCard className="p-4 pb-3 mt-6 font-semibold ">
       <div className="flex justify-between">
@@ -53,8 +67,8 @@ export const Content=({
         Взят {dateText}
       </div>
       <div className="flex justify-between mt-2">
-        <div className="text-[16px]">Сумма кредита: {creditLimit} {currencySign}</div>
-        <div className="text-gray">{paymentType} платеж</div>
+        <div className="text-[16px]">Кредитный лимит: {creditLimit} {currencySign}</div>
+        <div className="text-gray">{paymentTypeText}</div>
       </div>
       <div className="flex justify-between text-gray-400 text-sm mt-2">
         <span>Уникальный номер кредитного счёта </span>
@@ -64,6 +78,7 @@ export const Content=({
         <div className="text-lg">
           <div>Остаток долга: {debt} {currencySign}</div>
           <div className="mt-2">Баланс: {balance} {currencySign}</div>
+          <div className="mt-2">Мин. платеж: {minimumPayment} {currencySign}</div>
         </div>
         <div className="grid">
           {isFrozen!==true &&

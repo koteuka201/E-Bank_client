@@ -1,8 +1,10 @@
+import { PaymentType } from "./paymentType"
+
 export type TariffBrief={
   id: string
   name: string | undefined
   interestRate: number
-  paymentType: string
+  paymentType: PaymentType
 }
 
 export type TariffInfo={

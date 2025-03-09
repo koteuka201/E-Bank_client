@@ -5,8 +5,8 @@ export type GetMyAccountsRequestArgs={
 }
 
 export type GetMyAccountsResponse={
-  debitCardBankAccounts: AccountAndCard[]
-  creditCardBankAccounts: AccountAndCard[]
+  cardBankAccounts: AccountAndCard[]
+  creditBankAccounts: AccountAndCard[]
 }
 
 export type AccountAndCard={

@@ -10,6 +10,7 @@ export type AccountItemProps={
   readonly bankAccountType: BankAccountType
   readonly isFrozen: boolean
   readonly accountName: StringOrNull
+  readonly closeDateTime: StringOrNull
   readonly cardNumber: StringOrNull
   readonly cardCategory: CardCategory
   readonly cardType: CardType
@@ -18,11 +19,11 @@ export type AccountItemProps={
 export const AccountItem=({
   currencyType,
   balance,
-  isFrozen,
   accountName,
   cardNumber,
   cardCategory,
-  cardType
+  cardType,
+  closeDateTime
 }:AccountItemProps)=>{
 
   const cardFill=useMemo(()=>{
@@ -52,10 +53,11 @@ export const AccountItem=({
 
   return(
     <div className="border rounded-md p-3">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <div className="flex gap-1 items-center">
           <RectangleHorizontal size={40} strokeWidth={0.5} fill={cardFill} />
           <span className="font-semibold">E-{cardCategory}</span>
+          {closeDateTime!=null && <span className="text-red font-semibold"> (счёт закрыт)</span>}
         </div>
         <div className="flex font-semibold items-center">
           {cardTypeText} {cardCategory} карта
@@ -65,9 +67,8 @@ export const AccountItem=({
         <div className="text-lg font-semibold">{balance} {currencySign}</div>
         <div className="text-[16px] font-medium">
           {accountName}
-          {isFrozen===true && <span className="text-red"> (закрыт)</span>}
         </div>
-        <div className="text-[16px] font-medium">{cardNumber}</div>
+        <div className="text-[16px] font-medium">{cardNumber?.replace(/(\d{4})(\d{4})(\d{2})/, '$1 $2 $3')}</div>
       </div>
     </div>
   )

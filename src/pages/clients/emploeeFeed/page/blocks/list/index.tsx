@@ -6,7 +6,8 @@ import { UsersListRenderer } from "@widgets/users"
 export const List=()=>{
 
   const {data, isError, isLoading, isFetching}=useGetUsersFeed({
-    role: UserRole.Employee
+    userRole: UserRole.Employee,
+    pageSize: 1000
   })
   
   if(isLoading || isFetching){
@@ -25,7 +26,7 @@ export const List=()=>{
 
   return(
     <CommonCard className="py-2 px-3 mt-4">
-      <UsersListRenderer users={data} />
+      <UsersListRenderer users={data.users} />
     </CommonCard>
   )
 }

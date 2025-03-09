@@ -41,6 +41,7 @@ export const BankAccountsRenderer=({accounts}:BankAccountsRendererProps)=>{
             cardNumber={account.card.cardNumber}
             cardCategory={account.card.cardCategory}
             cardType={account.card.cardType}
+            closeDateTime={account.bankAccount.closeDateTime}
           />
         </Link>
       ))}

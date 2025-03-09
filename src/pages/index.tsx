@@ -7,12 +7,14 @@ import { WellcomePageRouting } from "./wellcome"
 import { ClientsRouting } from "./clients"
 import { LoginRouting } from "./login"
 import { RegistrationPageRouting } from "./register"
+import { BannedPageRouting } from "./bannedPage"
 
 export const Routing=()=>{
 
   return(
     <Routes>
       <Route>
+        {BannedPageRouting}
         {LoginRouting}
         {RegistrationPageRouting}
       </Route>

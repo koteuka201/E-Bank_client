@@ -1,15 +1,16 @@
 import { useCallback } from "react"
 import { PaymentAccountBody, PaymentButton, useDepositAccount } from "@features/accounts"
 import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
-import { useSwitch } from "@shared/lib"
+import { StringOrNull, useSwitch } from "@shared/lib"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { CircleFadingPlus } from "lucide-react"
 
 export type DepositAccountButtonProps={
   readonly accountId: string
+  readonly currencyType: StringOrNull
 }
 
-export const DepositAccountButton=({accountId}: DepositAccountButtonProps)=>{
+export const DepositAccountButton=({accountId, currencyType}: DepositAccountButtonProps)=>{
   
   const {control, handleSubmit, reset, formState: {errors}}=useForm<PaymentAccountBody>()
   const {mutate: deposit}=useDepositAccount({accountId})
@@ -41,10 +42,15 @@ export const DepositAccountButton=({accountId}: DepositAccountButtonProps)=>{
               Валюта
             </Label>
             <Controller 
-              defaultValue=""
+              defaultValue={currencyType ? currencyType : ''}
               name="currencyType"
               control={control}
-              rules={{required: "Это обязательное поле"}}
+              rules={{required: "Это обязательное поле",
+                pattern: {
+                  value: /^[A-Z]{1,5}$/,
+                  message: "Разрешены только латинские буквы в верхнем регистре (до 5 символов)"
+                }
+              }}
               render={({field})=>(
                 <Input 
                   {...field}

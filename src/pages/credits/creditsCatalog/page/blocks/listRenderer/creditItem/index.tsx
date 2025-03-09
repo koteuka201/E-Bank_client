@@ -1,4 +1,6 @@
+import { useMemo } from "react"
 import { GetCreditButton } from "../../getCreditButton"
+import { PaymentType } from "@shared/api"
 
 export type CreditItemProps={
   readonly id: string
@@ -14,8 +16,22 @@ export const CreditItem=({
   name,
   interestRate,
   paymentType,
-  creditLimit
+  creditLimit,
+  minimumPayment
 }:CreditItemProps)=>{
+
+  const paymentTypeText=useMemo(()=>{
+    switch(paymentType){
+      case PaymentType.Daily:
+        return 'Ежедневный платеж'
+      case PaymentType.Weekly:
+        return 'Еженедельный платеж'
+      case PaymentType.Monthly:
+        return 'Ежемесячный платеж'
+    }
+    return
+  },[paymentType])
+
   return(
     <div className="border rounded-md p-3 font-semibold">
       <div className="flex justify-between items-center">
@@ -24,8 +40,9 @@ export const CreditItem=({
       </div>
       <div className="flex justify-between items-center mt-3">
         <span>Кредитный лимит: {creditLimit} ₽</span>
-        <span>{paymentType} платеж</span>
+        <span>{paymentTypeText}</span>
       </div>
+        <span>Минимальный платеж: {minimumPayment} ₽</span>
       <div className="flex justify-end mt-3">
         <GetCreditButton creditLimit={creditLimit} id={id} />
         {/* roleCheck */}

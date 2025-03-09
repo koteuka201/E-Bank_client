@@ -27,7 +27,7 @@ export const List=()=>{
       <AccordionItem value="item-1">
         <AccordionTrigger>Дебетовые продукты</AccordionTrigger>
         <AccordionContent>
-          <BankAccountsRenderer accounts={data?.debitCardBankAccounts} />
+          <BankAccountsRenderer accounts={data?.cardBankAccounts} />
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">

@@ -40,6 +40,7 @@ export const DebitAccountDetailsPage=()=>{
         accountName={data.bankAccount.accountName}
         cardNumber={data.card.cardNumber}
         cardCategory={data.card.cardCategory}
+        closeDateTime={data.bankAccount.closeDateTime}
       />
     </>
   )

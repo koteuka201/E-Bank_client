@@ -2,13 +2,9 @@ import { useGetMyCredits } from "@entities/credits"
 import { CommonCard, Spinner } from "@shared/ui"
 import { ListRenderer } from "../listRenderer"
 
-export type ListProps={
-  readonly id: string
-}
-
-export const List=({id}: ListProps)=>{
+export const List=()=>{
   
-  const {data, isError, isLoading, isFetching}=useGetMyCredits({UserId: id})
+  const {data, isError, isLoading, isFetching}=useGetMyCredits()
 
   if(isLoading || isFetching){
     return(

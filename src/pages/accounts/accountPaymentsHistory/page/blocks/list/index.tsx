@@ -33,13 +33,13 @@ export const List=({id}: ListProps)=>{
 
   return(
     <CommonCard className="py-2 px-3 mt-4 bg-white">
-      {data.length === 0 &&
+      {data.bankAccountOperations.length === 0 &&
         <div className="text-center font-semibold text-lg">
           По этому счёту еще не были совершены операции! 
         </div>
       }
       <div className="grid gap-1.5">
-        {data.map((payment, index)=>(
+        {data.bankAccountOperations.map((payment, index)=>(
           <PaymentItem key={index} {...payment} />
         ))}
       </div>

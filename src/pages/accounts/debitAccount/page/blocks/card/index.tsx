@@ -19,16 +19,17 @@ export type CardBlockProps={
   readonly accountName: StringOrNull
   readonly cardNumber: StringOrNull
   readonly cardCategory: CardCategory
+  readonly closeDateTime: string | null | undefined
 }
 
 export const CardBlock=({
   id,
   currencyType,
   balance,
-  isFrozen,
   accountName,
   cardNumber,
-  cardCategory
+  cardCategory,
+  closeDateTime
 }: CardBlockProps)=>{
 
   const cardFill=useMemo(()=>{
@@ -49,12 +50,13 @@ export const CardBlock=({
 
   return(
     <CommonCard className="p-4 pb-3 mt-6">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <div className="text-xl font-bold">
           {accountName}
-          {isFrozen===true && <span className="text-red"> (закрыт)</span>}
         </div>
-        {isFrozen===false && <CloseAccountButton accountId={id} />}
+        {closeDateTime==null? <CloseAccountButton accountId={id} canBeClosed={balance===0} /> :
+          <span className="text-red font-semibold text-lg"> (закрыт)</span>
+        }
       </div>
       <div className="grid grid-cols-10 mt-6">
         <CardItem accountName={accountName} cardCategory={cardCategory} cardNumber={cardNumber} />
@@ -64,10 +66,10 @@ export const CardBlock=({
           <RectangleHorizontal size={40} strokeWidth={0.5} fill={cardFill} />
           <span className="font-bold text-[25px]">{balance} {currencySign}</span>
         </div>
-        {isFrozen===false &&
+        {closeDateTime==null &&
           <div className="flex gap-2">
-            <WithdrawAccountButton accountId={id} balance={balance} />
-            <DepositAccountButton accountId={id} />
+            <WithdrawAccountButton accountId={id} balance={balance} currencyType={currencyType} />
+            <DepositAccountButton accountId={id} currencyType={currencyType} />
           </div>
         }
       </div>

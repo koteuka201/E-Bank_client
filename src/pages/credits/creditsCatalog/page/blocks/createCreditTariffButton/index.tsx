@@ -1,10 +1,11 @@
 import { CirclePlus } from "lucide-react"
 import { CommonCard } from "@shared/ui"
-import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
+import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@shared/components"
 import { useCallback } from "react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { useSwitch } from "@shared/lib"
 import { CreateTariffBody, useCreateCreditTariff } from "@features/credits"
+import { PaymentType } from "@shared/api"
 
 export const CreateCreditTariffButton=()=>{
 
@@ -73,7 +74,9 @@ export const CreateCreditTariffButton=()=>{
               defaultValue={0}
               name="interestRate"
               control={control}
-              rules={{required: "Это обязательное поле"}}
+              rules={{required: "Это обязательное поле",
+                min: { value: 0, message: "минимальная сумма 0"},
+              }}
               render={({field})=>(
                 <Input 
                   {...field}
@@ -113,7 +116,9 @@ export const CreateCreditTariffButton=()=>{
               defaultValue={0}
               name="minimumPayment"
               control={control}
-              rules={{required: "Это обязательное поле"}}
+              rules={{required: "Это обязательное поле",
+                min: { value: 0, message: "минимальная сумма 0"},
+              }}
               render={({field})=>(
                 <Input 
                   {...field}
@@ -130,17 +135,21 @@ export const CreateCreditTariffButton=()=>{
               Вид платежа
             </Label>
             <Controller 
-              defaultValue=''
+              defaultValue={PaymentType.Daily}
               name="paymentType"
               control={control}
               rules={{required: "Это обязательное поле"}}
               render={({field})=>(
-                <Input 
-                  {...field}
-                  id="paymentType"
-                  type="text"
-                  placeholder="Введите вид платежа"
-                />
+                <Select onValueChange={field.onChange} {...field}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Выберите роль" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={PaymentType.Daily}>Ежедневный</SelectItem>
+                    <SelectItem value={PaymentType.Weekly}>Еженедельный</SelectItem>
+                    <SelectItem value={PaymentType.Monthly}>Ежемесячный</SelectItem>
+                  </SelectContent>
+                </Select>
               )}
             />
             {errors.paymentType && <span className="text-red text-sm">{errors.paymentType.message}</span>}

@@ -4,9 +4,10 @@ import { useSwitch } from "@shared/lib"
 
 export type CloseAccountButtonProps={
   readonly accountId: string 
+  readonly canBeClosed: boolean
 }
 
-export const CloseAccountButton=({accountId}:CloseAccountButtonProps)=>{
+export const CloseAccountButton=({accountId, canBeClosed}:CloseAccountButtonProps)=>{
 
   const {mutate: closeAccount}=useCloseAccount({accountId})
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
@@ -21,13 +22,18 @@ export const CloseAccountButton=({accountId}:CloseAccountButtonProps)=>{
           <DialogTitle>Закрытие счёта</DialogTitle>
         </DialogHeader>
         <DialogDescription>
-          Вы уверены, что хотите закрыть данный счет?
+          {canBeClosed ? (
+            <span>Вы уверены, что хотите закрыть данный счет?</span>
+          ): (
+            <span>Невозможно закрыть счет с остатком. Пожалуйста, снимите все средства перед закрытием!</span>
+          )}
+          
         </DialogDescription>
         <DialogFooter className="mt-4">
           <Button type="button" variant={'gray'} onClick={handleClose}>
             Отмена
           </Button>
-          <Button type="button" variant={'destructive'} onClick={()=>closeAccount({data:{}}, {onSuccess: handleClose})}>
+          <Button disabled={!canBeClosed} type="button" variant={'destructive'} onClick={()=>closeAccount({data:{}}, {onSuccess: handleClose})}>
             Закрыть
           </Button>
         </DialogFooter>

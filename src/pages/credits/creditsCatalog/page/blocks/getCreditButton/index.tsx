@@ -1,8 +1,10 @@
 import { GetCreditForm, useGetCredit } from "@features/credits"
 import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
+import { MY_CREDITS_PAGE_URL } from "@shared/config"
 import { useSwitch } from "@shared/lib"
 import { useCallback } from "react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 
 export type GetCreditButtonProps={
   readonly id: string
@@ -11,6 +13,7 @@ export type GetCreditButtonProps={
 
 export const GetCreditButton=({id,creditLimit}:GetCreditButtonProps)=>{
   
+  const navigate=useNavigate()
   const {control, handleSubmit, reset, formState: {errors}}=useForm<GetCreditForm>()
   const {mutate: getCredit}=useGetCredit()
 
@@ -22,16 +25,20 @@ export const GetCreditButton=({id,creditLimit}:GetCreditButtonProps)=>{
   },[reset, handleClose])
 
   const onSubmit: SubmitHandler<GetCreditForm>=useCallback((data)=>{
-    if(data.amount==undefined || data.currencyType==undefined || data.amount>creditLimit) return
+    if(data.amount==undefined || data.currencyType==undefined || data.accountName==undefined || data.amount>creditLimit) return
     getCredit({
       data: {
-        userId: '1',
         tariffId: id,
-        accountName: '',
+        accountName: data.accountName,
         amount: data.amount,
         currencyType: data.currencyType
       }
-    }, { onSuccess: onClose })
+    }, { 
+      onSuccess: () => {
+        onClose
+        navigate(MY_CREDITS_PAGE_URL)
+      } 
+    })
   },[id, getCredit, onClose, creditLimit])
 
   return(
@@ -49,10 +56,15 @@ export const GetCreditButton=({id,creditLimit}:GetCreditButtonProps)=>{
               Валюта
             </Label>
             <Controller 
-              defaultValue=""
+              defaultValue="RUB"
               name="currencyType"
               control={control}
-              rules={{required: "Это обязательное поле"}}
+              rules={{required: "Это обязательное поле",
+                pattern: {
+                  value: /^[A-Z]{1,5}$/,
+                  message: "Разрешены только латинские буквы в верхнем регистре (до 5 символов)"
+                }
+              }}
               render={({field})=>(
                 <Input 
                   {...field}
@@ -63,6 +75,26 @@ export const GetCreditButton=({id,creditLimit}:GetCreditButtonProps)=>{
               )}
             />
             {errors.currencyType && <span className="text-red text-sm">{errors.currencyType.message}</span>}
+          </div>
+          <div>
+            <Label htmlFor="accountName">
+              Название счёта
+            </Label>
+            <Controller 
+              defaultValue=""
+              name="accountName"
+              control={control}
+              rules={{required: "Это обязательное поле"}}
+              render={({field})=>(
+                <Input 
+                  {...field}
+                  id="accountName"
+                  type="text"
+                  placeholder="Введите название счёта"
+                />
+              )}
+            />
+            {errors.accountName && <span className="text-red text-sm">{errors.accountName.message}</span>}
           </div>
           <div>
             <Label htmlFor="amount">

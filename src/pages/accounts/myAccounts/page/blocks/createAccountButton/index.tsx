@@ -44,10 +44,15 @@ export const CreateAccountButton=()=>{
               Валюта
             </Label>
             <Controller 
-              defaultValue=""
+              defaultValue="RUB"
               name="currencyType"
               control={control}
-              rules={{required: "Это обязательное поле"}}
+              rules={{required: "Это обязательное поле",
+                pattern: {
+                  value: /^[A-Z]{1,5}$/,
+                  message: "Разрешены только латинские буквы в верхнем регистре (до 5 символов)"
+                }
+              }}
               render={({field})=>(
                 <Input 
                   {...field}

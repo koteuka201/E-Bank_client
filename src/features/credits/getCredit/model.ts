@@ -1,5 +1,4 @@
 export type GetCreditBody={
-  userId: string
   tariffId: string
   amount: number
   currencyType: string
@@ -8,4 +7,5 @@ export type GetCreditBody={
 export type GetCreditForm={
   amount: number
   currencyType: string
+  accountName: string
 }

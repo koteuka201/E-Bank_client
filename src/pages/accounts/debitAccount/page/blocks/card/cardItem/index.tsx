@@ -18,7 +18,7 @@ export const CardItem=({accountName, cardCategory, cardNumber}:CardItemProps)=>{
       <CircleCheckBig strokeWidth={2.8} size={28} color="white" />
       <div className="font-semibold text-white mt-[70px]">
         <div>{accountName}</div>
-        <div>{cardNumber}</div>
+        <div>{cardNumber?.replace(/(\d{4})(\d{4})(\d{2})/, '$1 $2 $3')}</div>
       </div>
     </div>
   )

@@ -23,7 +23,7 @@ export const CloseCreditButton=({creditId, canBeClosed}:CloseCreditButtonProps)=
         </DialogHeader>
         <DialogDescription>
           {canBeClosed ? (
-            <span>Вы уверены, что хотите закрыть данный счет?</span>
+            <span>Вы уверены, что хотите закрыть кредит?</span>
           ): (
             <span>Вы не можете закрыть кредит, пока не погасите долг по нему</span>
           )}

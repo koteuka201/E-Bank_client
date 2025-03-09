@@ -108,7 +108,7 @@ export const CreateUserButton=({userRole}:CreateUserButtonProps)=>{
                 <Input 
                   {...field}
                   id="password"
-                  type="text"
+                  type="password"
                   placeholder="Введите пароль от аккаунта"
                 />
               )}
