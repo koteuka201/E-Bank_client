@@ -24,6 +24,7 @@ export const UsersListRenderer=({users}: UsersListRendererProps)=>{
           isManuallyBlocked={user.isManuallyBlocked}
           role={user.role}
           userName={user.userName}
+          email={user.email}
         />
       ))}
     </div>

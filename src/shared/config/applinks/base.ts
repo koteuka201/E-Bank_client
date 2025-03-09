@@ -12,7 +12,7 @@ export const USER_PAGE_START_URL=`${APP_START_URL}/user`
 export const GENERATE_USER_DETAILS_PAGE_URL=(id: string, role: UserRole)=>{
   const reserveUrl= role ===UserRole.Client ? CLIENTS_PAGE_URL : STAFF_PAGE_URL
 
-  return generateLinkWithId(reserveUrl, USER_PAGE_START_URL, 'detailes' , id)
+  return generateLinkWithId(reserveUrl, USER_PAGE_START_URL, 'details' , id)
 }
 
 export const LOGIN_PAGE_URL = `${APP_START_URL}/login`

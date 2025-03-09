@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { useGetDebitAccountDetails } from "@entities/accounts"
 import { Container, Spinner } from "@shared/ui"
 import { List } from "./blocks"
+import { GoBackButton } from "@widgets/goBackButton"
 
 export const AccountPaymentsHistory=()=>{
   
@@ -19,7 +20,8 @@ export const AccountPaymentsHistory=()=>{
   return(
     <>
       <Container fluid>
-        <div className="font-semibold text-2xl border-b">История операций по счёту - {data?.bankAccount.accountName}</div>
+        <GoBackButton />
+        <div className="font-semibold text-2xl border-b mt-3">История операций по счёту - {data?.bankAccount.accountName}</div>
         <Suspense fallback={<Spinner />}>
           <List id={id} />
         </Suspense>

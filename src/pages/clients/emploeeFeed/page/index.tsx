@@ -8,7 +8,7 @@ export const EmploeeFeedPage=()=>{
   return(
     <Container fluid>
       {/* roleCheck */}
-      <div className="font-semibold text-2xl border-b">Клиенты банка</div>
+      <div className="font-semibold text-2xl border-b">Сотрудники банка</div>
       <CreateUserButton userRole={UserRole.Employee} /> 
       <Suspense fallback={<Spinner />}>
         <List />

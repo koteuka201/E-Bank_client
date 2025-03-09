@@ -14,7 +14,7 @@ export const BankAccountsRenderer=({accounts}:BankAccountsRendererProps)=>{
       <div 
         className="text-center font-semibold text-lg"
       >
-        Не удалось загрузить ваши счета. Перезагрузите страницу или попробуйте позже!
+        Не удалось загрузить счета. Перезагрузите страницу или попробуйте позже!
       </div>
     )
   }
@@ -22,7 +22,7 @@ export const BankAccountsRenderer=({accounts}:BankAccountsRendererProps)=>{
   if(accounts.length == 0){
     return(
       <div className="text-center font-semibold text-lg">
-        У вас еще нет ни одного открытого продукта в этой категории.
+        Еще нет ни одного открытого продукта в этой категории.
       </div>
     )
   }

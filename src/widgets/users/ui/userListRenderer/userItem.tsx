@@ -10,13 +10,15 @@ export type UserItemProps={
   role: UserRole
   isManuallyBlocked: boolean
   userName: string | undefined
+  email: string | undefined | null
 }
 
 export const UserItem=({
   id,
   role,
   isManuallyBlocked,
-  userName
+  userName,
+  email
 }:UserItemProps)=>{
 
   const roleText=useMemo(()=>{
@@ -41,10 +43,14 @@ export const UserItem=({
           <span className="text-red">Заблокирован</span>
         )}
       </div>
-      <div className="flex justify-end items-center mt-1.5">
-        <Link to={GENERATE_USER_DETAILS_PAGE_URL(id, role)}>
-          <Button className="text-sm" variant={"main"} size={"sm"}>Подробнее</Button>
-        </Link>
+      <div className="flex justify-between items-center">
+
+        {email}
+        <div className="flex justify-end items-center mt-1.5">
+          <Link to={GENERATE_USER_DETAILS_PAGE_URL(id, role)}>
+            <Button className="text-sm" variant={"main"} size={"sm"}>Подробнее</Button>
+          </Link>
+        </div>
       </div>
     </div>
   )
