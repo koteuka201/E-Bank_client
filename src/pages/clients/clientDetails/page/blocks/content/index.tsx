@@ -59,7 +59,7 @@ export const Content=({
           </div>
         </div>
       </CommonCard>
-      {true &&
+      {role===UserRole.Client &&
         <CommonCard className="py-2 px-3 mt-4 bg-white">
           <Accordion type="single" defaultValue="item-1" collapsible>
           <AccordionItem value="item-1">
