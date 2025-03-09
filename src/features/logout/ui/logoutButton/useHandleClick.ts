@@ -13,7 +13,7 @@ export const useHandleClick=()=>{
     localStorage.removeItem('token')
     queryClient.invalidateQueries({ queryKey: [ApiTagsEnum.ClientProfile] })
     navigate(LOGIN_PAGE_URL)
-  },[navigate])
+  },[navigate, queryClient])
 
   return handleClick
 }
