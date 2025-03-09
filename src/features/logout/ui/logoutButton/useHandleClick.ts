@@ -1,14 +1,15 @@
-import { useLogout } from "@features/logout/api"
+import { LOGIN_PAGE_URL } from "@shared/config"
 import { useCallback } from "react"
+import { useNavigate } from "react-router-dom"
 
 export const useHandleClick=()=>{
-  const {mutate, isError}=useLogout()
   
-  const handleClick=useCallback(()=>{
-    mutate({})
+  const navigate = useNavigate()
 
-    if(isError===false) localStorage.removeItem('token')
-  },[mutate, isError])
+  const handleClick=useCallback(()=>{
+    localStorage.removeItem('token')
+    navigate(LOGIN_PAGE_URL)
+  },[navigate])
 
   return handleClick
 }

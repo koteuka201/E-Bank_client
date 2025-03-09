@@ -4,7 +4,7 @@ import { Button, Card, CardContent, CardHeader, CardTitle, Input, Label, Select,
 import { LOGIN_PAGE_URL } from "@shared/config"
 import { useCallback } from "react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export const RegistrationPage=()=>{
   
@@ -36,6 +36,7 @@ export const RegistrationPage=()=>{
             <div>
               <Label htmlFor="userName">Имя пользователя</Label>
               <Controller
+                defaultValue=""
                 name="userName"
                 control={control}
                 rules={{ required: "Это обязательное поле" }}
@@ -48,9 +49,12 @@ export const RegistrationPage=()=>{
             <div>
               <Label htmlFor="email">Email</Label>
               <Controller
+                defaultValue=""
                 name="email"
                 control={control}
-                rules={{ required: "Это обязательное поле" }}
+                rules={{ 
+                  required: "Это обязательное поле"
+                }}
                 render={({ field }) => (
                   <Input {...field} id="email" type="email" placeholder="Введите email" required />
                 )}
@@ -60,6 +64,7 @@ export const RegistrationPage=()=>{
             <div>
               <Label htmlFor="password">Пароль</Label>
               <Controller
+                defaultValue=""
                 name="password"
                 control={control}
                 rules={{ 
@@ -94,6 +99,12 @@ export const RegistrationPage=()=>{
             </div>
             <Button type="submit" className="w-full">Зарегистрироваться</Button>
           </form>
+          <div className="mt-4 text-center text-sm">
+            Уже бывали у нас?{" "}
+            <Link to={LOGIN_PAGE_URL} className="text-blue-500 hover:underline">
+              Войти в аккаунт
+            </Link>
+          </div>
         </CardContent>
       </Card>
     </div>

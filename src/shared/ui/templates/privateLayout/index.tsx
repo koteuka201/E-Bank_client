@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { Navigate, Outlet } from "react-router-dom"
 import { ActualizeStorage, useCheckUserAuth } from "@shared/lib"
 import { BaseLayout } from "../mainLayout"
-import { REGISTER_PAGE_URL } from "@shared/config"
+import { LOGIN_PAGE_URL } from "@shared/config"
 
 
 export const PrivateLayout=()=>{
@@ -15,7 +15,7 @@ export const PrivateLayout=()=>{
   if(isLoading) return <>...Loading</>
   
   if(!isAuth && isLoading===false){
-    return <Navigate to={REGISTER_PAGE_URL} />
+    return <Navigate to={LOGIN_PAGE_URL} />
   }
   
   return(

@@ -9,15 +9,14 @@ export const LoginPage=()=>{
 
   const navigate=useNavigate()
   const {control, handleSubmit, reset, formState: {errors}}=useForm<LoginBody>() 
-  const {mutate: login, data: loginData}=useLogin()
+  const {mutate: login }=useLogin()
 
   const onSubmit: SubmitHandler<LoginBody>=useCallback((data)=>{
     if(data.email == undefined || data.password == undefined) return
     login({ data },
     {
-      onSuccess: () => {
-        console.log(loginData)
-        localStorage.setItem('token', loginData ? loginData.token : '')
+      onSuccess: (response) => {
+        localStorage.setItem('token', response.token)
         reset()
         navigate(WELCOME_PAGE_URL)
       },
