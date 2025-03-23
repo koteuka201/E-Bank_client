@@ -1,3 +1,5 @@
+import { ThemeToggle } from "@features/themeToggle";
+
 export const WellcomePage = () => {
   return (
     <div className="flex flex-col items-center p-4">
@@ -7,6 +9,7 @@ export const WellcomePage = () => {
           Ваши финансы под контролем. Мы предлагаем быстрые и удобные решения для управления вашими деньгами.
         </div>
       </div>
+      <ThemeToggle />
     </div>
   );
 };

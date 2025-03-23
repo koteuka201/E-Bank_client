@@ -16,7 +16,8 @@ export const useCreditApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: R
        })
       return response.data
     },
-    staleTime: 600000
+    staleTime: 600000,
+    retry: 2
   })
 }
 
