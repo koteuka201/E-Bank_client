@@ -15,7 +15,7 @@ export const GetCreditButton=({id,creditLimit}:GetCreditButtonProps)=>{
   
   const navigate=useNavigate()
   const {control, handleSubmit, reset, formState: {errors}}=useForm<GetCreditForm>()
-  const {mutate: getCredit}=useGetCredit()
+  const {mutate: getCredit, isPending}=useGetCredit()
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
   
@@ -124,7 +124,7 @@ export const GetCreditButton=({id,creditLimit}:GetCreditButtonProps)=>{
             <Button type="button" variant={'gray'} onClick={handleClose}>
               Отмена
             </Button>
-            <Button type="submit" variant={'main'}>
+            <Button isLoading={isPending} type="submit" variant={'main'}>
               Оформить
             </Button>
           </DialogFooter>

@@ -1,4 +1,3 @@
-import { ThemeToggle } from "@features/themeToggle";
 import { Card } from "@shared/components";
 
 export const WellcomePage = () => {
@@ -10,7 +9,6 @@ export const WellcomePage = () => {
           Ваши финансы под контролем. Мы предлагаем быстрые и удобные решения для управления вашими деньгами.
         </div>
       </Card>
-      <ThemeToggle />
     </div>
   );
 };

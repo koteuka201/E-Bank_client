@@ -9,7 +9,7 @@ export type CloseAccountButtonProps={
 
 export const CloseAccountButton=({accountId, canBeClosed}:CloseAccountButtonProps)=>{
 
-  const {mutate: closeAccount}=useCloseAccount({accountId})
+  const {mutate: closeAccount, isPending}=useCloseAccount({accountId})
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
   
   return(
@@ -33,7 +33,7 @@ export const CloseAccountButton=({accountId, canBeClosed}:CloseAccountButtonProp
           <Button type="button" variant={'gray'} onClick={handleClose}>
             Отмена
           </Button>
-          <Button disabled={!canBeClosed} type="button" variant={'destructive'} onClick={()=>closeAccount({data:{}}, {onSuccess: handleClose})}>
+          <Button isLoading={isPending} disabled={!canBeClosed} type="button" variant={'destructive'} onClick={()=>closeAccount({data:{}}, {onSuccess: handleClose})}>
             Закрыть
           </Button>
         </DialogFooter>

@@ -1,7 +1,6 @@
 import { UserRole } from "@shared/api"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@shared/components"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Card } from "@shared/components"
 import { formatDateToRussian } from "@shared/lib"
-import { CommonCard } from "@shared/ui"
 import { BlockUserButton } from "@widgets/users"
 import { useMemo } from "react"
 import { AccountsList } from "../accountsList"
@@ -39,11 +38,11 @@ export const Content=({
 
   return(
     <>
-      <CommonCard className="p-4 pb-3 mt-6 font-semibold">
+      <Card className="p-4 pb-3 mt-6 font-semibold">
         <div className="flex justify-between items-center">
           <span className="text-lg">
             {userName}
-            <div className="inline-block rounded-lg text-[12px] bg-bgMain py-0.5 px-2.5 ms-2">{roleText}</div>
+            <div className="inline-block rounded-lg text-[12px] bg-bgMain dark:bg-bgMainDark py-0.5 px-2.5 ms-2">{roleText}</div>
           </span>
           {isManuallyBlocked===false ? (
             <BlockUserButton id={id} />
@@ -58,9 +57,9 @@ export const Content=({
             {birthDate!=undefined && <div>Дата рождения: {formatDateToRussian(birthDate, true)}</div>}
           </div>
         </div>
-      </CommonCard>
+      </Card>
       {role===UserRole.Client &&
-        <CommonCard className="py-2 px-3 mt-4 bg-white">
+        <Card className="py-2 px-3 mt-4 bg-white">
           <Accordion type="single" defaultValue="item-1" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger>Дебетовые счета</AccordionTrigger>
@@ -75,7 +74,7 @@ export const Content=({
             </AccordionContent>
           </AccordionItem>
           </Accordion>
-        </CommonCard>
+        </Card>
       }
     </>
   )

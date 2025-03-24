@@ -9,7 +9,7 @@ export const LoginPage=()=>{
 
   const navigate=useNavigate()
   const {control, handleSubmit, reset, formState: {errors}}=useForm<LoginBody>() 
-  const {mutate: login }=useLogin()
+  const {mutate: login, isPending }=useLogin()
 
   const onSubmit: SubmitHandler<LoginBody>=useCallback((data)=>{
     if(data.email == undefined || data.password == undefined) return
@@ -70,7 +70,7 @@ export const LoginPage=()=>{
               />
               {errors.password && <span className="text-red text-sm">{errors.password.message}</span>}
             </div>
-            <Button type="submit" className="w-full">Войти</Button>
+            <Button isLoading={isPending} type="submit" className="w-full">Войти</Button>
           </form>
           <div className="mt-4 text-center text-sm">
             Нет аккаунта?{" "}

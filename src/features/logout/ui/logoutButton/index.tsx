@@ -4,6 +4,7 @@ import { useGetMyProfile } from "@entities/clients"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@shared/components"
 import { useMemo } from "react"
 import { UserRole } from "@shared/api"
+import { ThemeToggle } from "@features/themeToggle"
 
 export const LogOutButton=()=>{
   const handleClick=useHandleClick()
@@ -21,7 +22,8 @@ export const LogOutButton=()=>{
   },[data?.role])
 
   return(
-    <div className="flex gap-2">
+    <div className="flex gap-2 items-center">
+      <ThemeToggle />
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1" className="p-0 no-underline">
           <AccordionTrigger className="p-0 no-underline">{data?.userName}</AccordionTrigger>

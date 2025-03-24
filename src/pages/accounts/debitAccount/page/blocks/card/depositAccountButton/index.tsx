@@ -13,7 +13,7 @@ export type DepositAccountButtonProps={
 export const DepositAccountButton=({accountId, currencyType}: DepositAccountButtonProps)=>{
   
   const {control, handleSubmit, reset, formState: {errors}}=useForm<PaymentAccountBody>()
-  const {mutate: deposit}=useDepositAccount({accountId})
+  const {mutate: deposit, isPending}=useDepositAccount({accountId})
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
   
@@ -89,7 +89,7 @@ export const DepositAccountButton=({accountId, currencyType}: DepositAccountButt
             <Button type="button" variant={'gray'} onClick={handleClose}>
               Отмена
             </Button>
-            <Button type="submit" variant={'main'}>
+            <Button isLoading={isPending} type="submit" variant={'main'}>
               Пополнить
             </Button>
           </DialogFooter>

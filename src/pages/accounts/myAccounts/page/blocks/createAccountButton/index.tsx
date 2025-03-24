@@ -1,6 +1,5 @@
 import { CirclePlus } from "lucide-react"
-import { CommonCard } from "@shared/ui"
-import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
+import { Button, Card, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
 import { useCallback } from "react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { CreateAccountBody, useCreateAccount } from "@features/accounts"
@@ -9,7 +8,7 @@ import { useSwitch } from "@shared/lib"
 export const CreateAccountButton=()=>{
 
   const {control, handleSubmit, reset, formState: {errors}}=useForm<CreateAccountBody>()
-  const {mutate: createAccount}=useCreateAccount()
+  const {mutate: createAccount, isPending}=useCreateAccount()
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
 
@@ -27,11 +26,11 @@ export const CreateAccountButton=()=>{
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <div className="grid grid-cols-12 mt-4">
         <div className="col-span-3">
-          <CommonCard className="p-3 cursor-pointer" onClick={handleOpen}>
+          <Card className="p-3 cursor-pointer" onClick={handleOpen}>
             <CirclePlus strokeWidth={1.5} size={28} />
             <div className="mt-[25px] font-semibold text-lg">Оформить</div>
             <div className="text-sm text-gray-600 font-semibold">счёт</div>
-          </CommonCard>
+          </Card>
         </div>
       </div>
       <DialogContent>
@@ -88,7 +87,7 @@ export const CreateAccountButton=()=>{
             <Button type="button" variant={'gray'} onClick={handleClose}>
               Отмена
             </Button>
-            <Button type="submit" variant={'main'}>
+            <Button isLoading={isPending} type="submit" variant={'main'}>
               Оформить
             </Button>
           </DialogFooter>

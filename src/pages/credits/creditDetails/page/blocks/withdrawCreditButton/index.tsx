@@ -14,8 +14,8 @@ export type WithdrawCreditButtonProps={
 export const WithdrawCreditButton=({creditId, balance}: WithdrawCreditButtonProps)=>{
   
   const {control, handleSubmit, reset, formState: {errors}}=useForm<PaymentCreditForm>()
-  const {mutate: withdraw}=useWithdrawCredit({creditId: creditId})
-  const {mutate: withdrawFromDebit}=useWithdrawCreditAccount({accountId: creditId})
+  const {mutate: withdraw, isPending: isDepositCredit}=useWithdrawCredit({creditId: creditId})
+  const {mutate: withdrawFromDebit, isPending: DepositCreditAccount}=useWithdrawCreditAccount({accountId: creditId})
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
   
@@ -120,7 +120,7 @@ export const WithdrawCreditButton=({creditId, balance}: WithdrawCreditButtonProp
             <Button type="button" variant={'gray'} onClick={handleClose}>
               Отмена
             </Button>
-            <Button type="submit" variant={'main'}>
+            <Button isLoading={DepositCreditAccount || isDepositCredit} type="submit" variant={'main'}>
               Снять
             </Button>
           </DialogFooter>

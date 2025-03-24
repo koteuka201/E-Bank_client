@@ -1,6 +1,5 @@
 import { CirclePlus } from "lucide-react"
-import { CommonCard } from "@shared/ui"
-import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@shared/components"
+import { Button, Card, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@shared/components"
 import { useCallback } from "react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { useSwitch } from "@shared/lib"
@@ -10,7 +9,7 @@ import { PaymentType } from "@shared/api"
 export const CreateCreditTariffButton=()=>{
 
   const {control, handleSubmit, reset, formState: {errors}}=useForm<CreateTariffBody>()
-  const {mutate: createTariff}=useCreateCreditTariff()
+  const {mutate: createTariff, isPending}=useCreateCreditTariff()
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
 
@@ -34,11 +33,11 @@ export const CreateCreditTariffButton=()=>{
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <div className="grid grid-cols-12 mt-4">
         <div className="col-span-3">
-          <CommonCard className="p-3 cursor-pointer" onClick={handleOpen}>
+          <Card className="p-3 cursor-pointer" onClick={handleOpen}>
             <CirclePlus strokeWidth={1.5} size={28} />
             <div className="mt-[25px] font-semibold text-lg">Создать</div>
             <div className="text-sm text-gray-600 font-semibold">кредитный тариф</div>
-          </CommonCard>
+          </Card>
         </div>
       </div>
       <DialogContent>
@@ -158,7 +157,7 @@ export const CreateCreditTariffButton=()=>{
             <Button type="button" variant={'gray'} onClick={handleClose}>
               Отмена
             </Button>
-            <Button type="submit" variant={'main'}>
+            <Button isLoading={isPending} type="submit" variant={'main'}>
               Создать
             </Button>
           </DialogFooter>

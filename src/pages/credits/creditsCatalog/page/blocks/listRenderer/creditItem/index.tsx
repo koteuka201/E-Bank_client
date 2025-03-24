@@ -39,7 +39,7 @@ export const CreditItem=({
     <div className="border rounded-md p-3 font-semibold">
       <div className="flex justify-between items-center">
         <span>{name}</span>
-        <span className="rounded-lg bg-bgMain py-1 px-2.5">{interestRate}%</span>
+        <span className="rounded-lg bg-bgMain dark:bg-bgMainDark py-1 px-2.5">{interestRate}%</span>
       </div>
       <div className="flex justify-between items-center mt-3">
         <span>Кредитный лимит: {creditLimit} ₽</span>

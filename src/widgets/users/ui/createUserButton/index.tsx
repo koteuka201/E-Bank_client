@@ -13,7 +13,7 @@ export type CreateUserButtonProps={
 export const CreateUserButton=({userRole}:CreateUserButtonProps)=>{
 
   const {control, handleSubmit, reset, formState: {errors}}=useForm<CreateUserBody>()
-  const {mutate: createUser}=useCreateUser()
+  const {mutate: createUser, isPending}=useCreateUser()
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
 
@@ -118,7 +118,7 @@ export const CreateUserButton=({userRole}:CreateUserButtonProps)=>{
             <Button type="button" variant={'gray'} onClick={handleClose}>
               Отмена
             </Button>
-            <Button type="submit" variant={'main'}>
+            <Button isLoading={isPending} type="submit" variant={'main'}>
               Создать
             </Button>
           </DialogFooter>

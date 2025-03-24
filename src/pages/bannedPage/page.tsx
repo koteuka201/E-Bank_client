@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const BannedPage = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-bgMain">
+    <div className="flex items-center justify-center min-h-screen bg-bgMain dark:bg-bgMainDark">
       <Card className="w-full max-w-md p-6 shadow-lg">
         <CardHeader>
           <CardTitle className="text-center text-red-600">Аккаунт заблокирован</CardTitle>
