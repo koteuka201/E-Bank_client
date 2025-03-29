@@ -4,7 +4,6 @@ import { DepositCreditButton } from "../depositCreditButton"
 import { formatDateToRussian } from "@shared/lib"
 import { CloseCreditButton } from "../closeCredit"
 import { PaymentType, UserRole } from "@shared/api"
-import { useGetMyProfile } from "@entities/clients"
 import { Card } from "@shared/components"
 
 export type ContentProps={
@@ -36,8 +35,6 @@ export const Content=({
   paymentType,
   minimumPayment
 }:ContentProps)=>{
-
-  const {data}=useGetMyProfile()
 
   const currencySign=useMemo(()=>{
     if(currencyType) return '₽'
@@ -84,7 +81,7 @@ export const Content=({
           <div className="mt-2">Мин. платеж: {minimumPayment} {currencySign}</div>
         </div>
         <div className="grid">
-          {isFrozen!==true && data?.role===UserRole.Client &&
+          {isFrozen!==true && import.meta.env["VITE_APP_TYPE"] !== UserRole.Employee &&
             <>
               <div className="flex gap-2">
                 <WithdrawCreditButton creditId={id} balance={balance} />

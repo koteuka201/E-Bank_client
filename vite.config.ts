@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => {
       __APP_TYPE__: JSON.stringify(env['VITE_APP_TYPE'])
     },
     server: {
-      port: env['VITE_APP_TYPE'] === "client" ? 5175 : 5174
+      port: Number(env['VITE_PORT']) || 5173
     },
     resolve: {
       alias:{

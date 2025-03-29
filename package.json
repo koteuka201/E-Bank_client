@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "start:client": "cross-env VITE_APP_TYPE=client vite --port 5175",
-    "start:employee": "cross-env VITE_APP_TYPE=employee vite --port 5174",
+    "start:client": "cross-env VITE_APP_TYPE=Client vite --port 5175",
+    "start:employee": "cross-env VITE_APP_TYPE=Employee vite --port 5174",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",

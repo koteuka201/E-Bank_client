@@ -9,7 +9,6 @@ import { WithdrawAccountButton } from "./withdrawAccountButton"
 import { Button, Card } from "@shared/components"
 import { GENERATE_BANK_ACCOUNT_PAYMENTS_HISTORY_PAGE_URL } from "@shared/config"
 import { Link } from "react-router-dom"
-import { useGetMyProfile } from "@entities/clients"
 
 export type CardBlockProps={
   readonly id: string
@@ -31,8 +30,6 @@ export const CardBlock=({
   cardCategory,
   closeDateTime
 }: CardBlockProps)=>{
-
-  const {data}=useGetMyProfile()
 
   const cardFill=useMemo(()=>{
     switch(cardCategory){
@@ -56,7 +53,7 @@ export const CardBlock=({
         <div className="text-xl font-bold">
           {accountName}
         </div>
-        {data?.role === UserRole.Client && (
+        {import.meta.env["VITE_APP_TYPE"] !== UserRole.Employee && (
           closeDateTime === null ? (
             <CloseAccountButton accountId={id} canBeClosed={balance === 0} />
           ) : (
@@ -72,7 +69,7 @@ export const CardBlock=({
           <RectangleHorizontal size={40} strokeWidth={0.5} fill={cardFill} />
           <span className="font-bold text-[25px]">{balance} {currencySign}</span>
         </div>
-        {closeDateTime==null && data?.role === UserRole.Client &&
+        {closeDateTime==null && import.meta.env["VITE_APP_TYPE"] !== UserRole.Employee &&
           <div className="flex gap-2">
             <WithdrawAccountButton accountId={id} balance={balance} currencyType={currencyType} />
             <DepositAccountButton accountId={id} currencyType={currencyType} />
