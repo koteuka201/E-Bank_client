@@ -10,5 +10,5 @@ export const WellcomePage = () => {
         </div>
       </Card>
     </div>
-  );
-};
+  )
+}
