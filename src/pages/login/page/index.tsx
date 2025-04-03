@@ -1,6 +1,7 @@
 import { LoginBody, useLogin } from "@features/login"
 import { Button, Card, CardContent, CardHeader, CardTitle, Input, Label } from "@shared/components"
 import { REGISTER_PAGE_URL, WELCOME_PAGE_URL } from "@shared/config"
+import userManager from "@shared/contexts/oauth/userManager"
 import { useCallback } from "react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
@@ -24,6 +25,18 @@ export const LoginPage=()=>{
   )
   },[login, navigate, reset])
 
+  //добавил этот прикол сюда, по идеи можешь создать провайдер какой-нить, чтобы он сам постоянно кидал на страницу, если у чела нет токена
+  //ну или так и оставить, в принципе не особо важно
+  //надо добавить logout с удалением токена и из куки, потому что оно туда сохраняет
+  //надо ещё кнопку закастомить, чтобы было органично + убрать лишнее, потому что авторизация теперь только через сторонний сервис делается я так понял
+  const oauth = () => {
+    userManager.signinRedirect({
+      state: { path: "http://localhost:5173/signin-oidc" },  //можно добавить путь по которому оно будет редиректнуто после успешного логина, вроде не должно поломаться
+    }).catch((error) => {
+      console.error("Ошибка при signinRedirect:", error);
+    });
+  };
+
   return(
     <div className="flex items-center justify-center min-h-screen">
       <Card className="w-full max-w-sm p-6">
@@ -31,6 +44,9 @@ export const LoginPage=()=>{
           <CardTitle className="text-center">Вход в аккаунт</CardTitle>
         </CardHeader>
         <CardContent>
+          <button className="btn btn-primary btn-sm" onClick={() => oauth()}>
+            Oauth
+          </button>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
               <Label htmlFor="email">Email</Label>
