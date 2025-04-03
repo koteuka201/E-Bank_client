@@ -10,7 +10,7 @@ export const RegistrationPage=()=>{
   
   const navigate=useNavigate()
   const { control, handleSubmit,reset, formState: { errors } } = useForm<RegisterBody>()
-  const {mutate: registration}=useRegistration()
+  const {mutate: registration, isPending}=useRegistration()
 
   const onSubmit: SubmitHandler<RegisterBody>=useCallback((data)=>{
     
@@ -97,7 +97,7 @@ export const RegistrationPage=()=>{
               />
               {errors.role && <span className="text-red text-sm">{errors.role.message}</span>}
             </div>
-            <Button type="submit" className="w-full">Зарегистрироваться</Button>
+            <Button isLoading={isPending} type="submit" className="w-full">Зарегистрироваться</Button>
           </form>
           <div className="mt-4 text-center text-sm">
             Уже бывали у нас?{" "}

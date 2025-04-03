@@ -5,10 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start:client": "cross-env VITE_APP_TYPE=Client vite --port 5175",
+    "start:employee": "cross-env VITE_APP_TYPE=Employee vite --port 5174",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "npm run dev",
+    "dev:client": "npm run start:client",
+    "dev:employee": "npm run start:employee",
     "lint:styles": "stylelint \"**/*.{scss,css}\"",
     "prepare": "husky",
     "server": "json-server --watch db.json --port 3000"
@@ -43,6 +47,7 @@
     "@typescript-eslint/eslint-plugin": "^8.24.1",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "cross-env": "^7.0.3",
     "eslint": "^9.21.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-react": "^7.37.4",

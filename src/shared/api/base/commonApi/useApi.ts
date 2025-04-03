@@ -6,30 +6,29 @@ import { AxiosRequestConfig } from "axios"
 import qs from 'qs'
 
 
-export const useApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: Record<string, any>, id?: string) => {
+export const useApiQuery = <R>(key: ApiTagsEnum[], url: string, params?: Record<string, any>) => {
   return useQuery<R>({
-    queryKey: [key, url, id, params],
+    queryKey: [key, url, params],
     queryFn: async () => {
-      const fullUrl = id ? `${url}/${id}` : url
-      const response = await api.get<R>(fullUrl, { params,
+      const response = await api.get<R>(url, { params,
         paramsSerializer: params => qs.stringify(params, { arrayFormat: 'repeat' }) 
        })
       return response.data
     },
-    staleTime: 600000
+    staleTime: 600000,
+    retry: 2
   })
 }
 
 export const useApiMutation = <TData = unknown, TResponse = any>(
-  { url, method, invalidateTags, params, id, urlAfter }: MutationOptions
+  { url, method, invalidateTags, params }: MutationOptions
 ) => {
   const queryClient = useQueryClient()
 
-  const fullUrl = id ? (urlAfter ? `${url}/${id}/${urlAfter}` : `${url}/${id}`) : url
   return useMutation<TResponse, Error, { data: TData; headers?: any; params?: Record<string, any> }>({
     mutationFn: async ({ data, headers, params: mutationParams  }) => {
       const config: AxiosRequestConfig<TData> = {
-        url: fullUrl,
+        url,
         method,
         data,
         headers,

@@ -17,13 +17,13 @@ export const PrivateLayout=()=>{
     ActualizeStorage()
   },[])
 
-  if(isLoading || isFetching){
-    return(
-      <div className="flex justify-center mt-10">
-        <Spinner />
-      </div>
-    )
-  }
+  // if(isLoading || isFetching){
+  //   return(
+  //     <div className="flex justify-center mt-10">
+  //       <Spinner />
+  //     </div>
+  //   )
+  // }
   
   if(isManuallyBlock===true){
     localStorage.removeItem('token')
@@ -31,9 +31,9 @@ export const PrivateLayout=()=>{
     return <Navigate to={BANNED_PAGE_URL} />
   }
 
-  if(!isAuth && isLoading===false){
-    return <Navigate to={LOGIN_PAGE_URL} />
-  }
+  // if(!isAuth && isLoading===false){
+  //   return <Navigate to={LOGIN_PAGE_URL} />
+  // }
   
   return(
     <BaseLayout>

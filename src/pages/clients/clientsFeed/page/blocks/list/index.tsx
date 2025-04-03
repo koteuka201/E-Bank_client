@@ -1,6 +1,7 @@
 import { useGetUsersFeed } from "@entities/clients"
 import { UserRole } from "@shared/api"
-import { CommonCard, Spinner } from "@shared/ui"
+import { Card } from "@shared/components"
+import { Spinner } from "@shared/ui"
 import { UsersListRenderer } from "@widgets/users"
 
 export const List=()=>{
@@ -25,8 +26,8 @@ export const List=()=>{
   }
 
   return(
-    <CommonCard className="py-2 px-3 mt-4">
+    <Card className="py-2 px-3 mt-4">
       <UsersListRenderer users={data.users} />
-    </CommonCard>
+    </Card>
   )
 }

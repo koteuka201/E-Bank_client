@@ -20,6 +20,7 @@ export default {
 				red: '#fb2c36',
 				main: '#22c55e',
 				bgMain: '#f1f1f1',
+				bgMainDark: '#121212',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

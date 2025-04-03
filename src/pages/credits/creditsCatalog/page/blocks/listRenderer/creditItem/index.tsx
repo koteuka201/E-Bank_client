@@ -1,7 +1,6 @@
 import { useMemo } from "react"
 import { GetCreditButton } from "../../getCreditButton"
 import { PaymentType, UserRole } from "@shared/api"
-import { useGetMyProfile } from "@entities/clients"
 
 export type CreditItemProps={
   readonly id: string
@@ -21,8 +20,6 @@ export const CreditItem=({
   minimumPayment
 }:CreditItemProps)=>{
 
-  const {data}=useGetMyProfile()
-
   const paymentTypeText=useMemo(()=>{
     switch(paymentType){
       case PaymentType.Daily:
@@ -39,7 +36,7 @@ export const CreditItem=({
     <div className="border rounded-md p-3 font-semibold">
       <div className="flex justify-between items-center">
         <span>{name}</span>
-        <span className="rounded-lg bg-bgMain py-1 px-2.5">{interestRate}%</span>
+        <span className="rounded-lg bg-bgMain dark:bg-bgMainDark py-1 px-2.5">{interestRate}%</span>
       </div>
       <div className="flex justify-between items-center mt-3">
         <span>Кредитный лимит: {creditLimit} ₽</span>
@@ -47,7 +44,7 @@ export const CreditItem=({
       </div>
         <span>Минимальный платеж: {minimumPayment} ₽</span>
       <div className="flex justify-end mt-3">
-        {data?.role===UserRole.Client && <GetCreditButton creditLimit={creditLimit} id={id} /> }
+        {import.meta.env["VITE_APP_TYPE"] !== UserRole.Employee && <GetCreditButton creditLimit={creditLimit} id={id} /> }
         {/* roleCheck */}
       </div>
     </div>

@@ -35,7 +35,7 @@ export const UserItem=({
       <div className="flex justify-between items-center">
         <span className="text-lg">
           {userName}
-          <div className="inline-block rounded-lg text-[12px] bg-bgMain py-0.5 px-2.5 ms-2">{roleText}</div>
+          <div className="inline-block rounded-lg text-[12px] bg-bgMain dark:bg-bgMainDark py-0.5 px-2.5 ms-2">{roleText}</div>
         </span>
         {isManuallyBlocked===false ? (
           <BlockUserButton id={id} />

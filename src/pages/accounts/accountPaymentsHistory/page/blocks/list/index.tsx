@@ -1,8 +1,9 @@
 import { useGetAccountsPaymentsHistory, useGetMyAccountsPaymentsHistory } from "@entities/accounts/paymentHistory"
-import { CommonCard, Spinner } from "@shared/ui"
+import { Spinner } from "@shared/ui"
 import { PaymentItem } from "../paymentItem"
 import { useGetMyProfile } from "@entities/clients"
 import { UserRole } from "@shared/api"
+import { Card } from "@shared/components"
 
 export type ListProps={
   readonly id: string
@@ -47,7 +48,7 @@ export const List=({id}: ListProps)=>{
     }
 
   return(
-    <CommonCard className="py-2 px-3 mt-4 bg-white">
+    <Card className="py-2 px-3 mt-4">
       {data.bankAccountOperations.length === 0 &&
         <div className="text-center font-semibold text-lg">
           По этому счёту еще не были совершены операции! 
@@ -58,6 +59,6 @@ export const List=({id}: ListProps)=>{
           <PaymentItem key={index} {...payment} />
         ))}
       </div>
-    </CommonCard>
+    </Card>
   )
 }

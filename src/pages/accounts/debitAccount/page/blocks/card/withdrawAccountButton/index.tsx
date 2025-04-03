@@ -14,7 +14,7 @@ export type WithdrawAccountButtonProps={
 export const WithdrawAccountButton=({accountId, balance, currencyType}: WithdrawAccountButtonProps)=>{
   
   const {control, handleSubmit, reset, formState: {errors}}=useForm<PaymentAccountBody>()
-  const {mutate: withdraw}=useWithdrawAccount({accountId})
+  const {mutate: withdraw, isPending}=useWithdrawAccount({accountId})
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
   
@@ -91,7 +91,7 @@ export const WithdrawAccountButton=({accountId, balance, currencyType}: Withdraw
             <Button type="button" variant={'gray'} onClick={handleClose}>
               Отмена
             </Button>
-            <Button type="submit" variant={'main'}>
+            <Button isLoading={isPending} type="submit" variant={'main'}>
               Снять
             </Button>
           </DialogFooter>

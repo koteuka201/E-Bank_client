@@ -13,8 +13,8 @@ export type DepositCreditButtonProps={
 export const DepositCreditButton=({creditId}: DepositCreditButtonProps)=>{
   
   const {control, handleSubmit, reset, formState: {errors}}=useForm<PaymentCreditForm>()
-  const {mutate: deposit}=useDepositCredit({creditId: creditId})
-  const {mutate: depositFromDebit}=useDepositCreditAccount({accountId: creditId})
+  const {mutate: deposit, isPending: isDepositCredit }=useDepositCredit({creditId: creditId})
+  const {mutate: depositFromDebit, isPending: DepositCreditAccount}=useDepositCreditAccount({accountId: creditId})
 
   const [isOpen, , ,handleClose, handleOpen]=useSwitch()
   
@@ -117,7 +117,7 @@ export const DepositCreditButton=({creditId}: DepositCreditButtonProps)=>{
             <Button type="button" variant={'gray'} onClick={handleClose}>
               Отмена
             </Button>
-            <Button type="submit" variant={'main'}>
+            <Button isLoading={DepositCreditAccount || isDepositCredit} type="submit" variant={'main'}>
               Пополнить
             </Button>
           </DialogFooter>

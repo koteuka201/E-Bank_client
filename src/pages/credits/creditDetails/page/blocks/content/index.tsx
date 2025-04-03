@@ -1,11 +1,10 @@
-import { CommonCard } from "@shared/ui"
 import { useMemo } from "react"
 import { WithdrawCreditButton } from "../withdrawCreditButton"
 import { DepositCreditButton } from "../depositCreditButton"
 import { formatDateToRussian } from "@shared/lib"
 import { CloseCreditButton } from "../closeCredit"
 import { PaymentType, UserRole } from "@shared/api"
-import { useGetMyProfile } from "@entities/clients"
+import { Card } from "@shared/components"
 
 export type ContentProps={
   readonly id: string
@@ -37,8 +36,6 @@ export const Content=({
   minimumPayment
 }:ContentProps)=>{
 
-  const {data}=useGetMyProfile()
-
   const currencySign=useMemo(()=>{
     if(currencyType) return '₽'
     return '₽'
@@ -61,10 +58,10 @@ export const Content=({
   },[paymentType])
 
   return(
-    <CommonCard className="p-4 pb-3 mt-6 font-semibold ">
+    <Card className="p-4 pb-3 mt-6 font-semibold ">
       <div className="flex justify-between">
         <span className="text-lg">{tariffName} {isFrozen === true && <span className="text-red">(закрыт)</span>}</span>
-        <div className="rounded-lg bg-bgMain py-1 px-2.5">{interestRate}%</div>
+        <div className="rounded-lg bg-bgMain dark:bg-bgMainDark py-1 px-2.5">{interestRate}%</div>
       </div>
       <div className="inline-block rounded-lg text-sm bg-bgMain py-0.5 px-2.5">
         Взят {dateText}
@@ -84,7 +81,7 @@ export const Content=({
           <div className="mt-2">Мин. платеж: {minimumPayment} {currencySign}</div>
         </div>
         <div className="grid">
-          {isFrozen!==true && data?.role===UserRole.Client &&
+          {isFrozen!==true && import.meta.env["VITE_APP_TYPE"] !== UserRole.Employee &&
             <>
               <div className="flex gap-2">
                 <WithdrawCreditButton creditId={id} balance={balance} />
@@ -95,6 +92,6 @@ export const Content=({
           }
         </div>
       </div>
-    </CommonCard>
+    </Card>
   )
 }

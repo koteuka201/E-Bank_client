@@ -1,6 +1,6 @@
 import { useGetMyAccounts } from "@entities/accounts"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@shared/components"
-import { CommonCard, Spinner } from "@shared/ui"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Card } from "@shared/components"
+import { Spinner } from "@shared/ui"
 import { BankAccountsRenderer } from "../bankAccountsRenderer"
 
 export const List=()=>{
@@ -22,7 +22,7 @@ export const List=()=>{
   }
 
   return(
-    <CommonCard className="py-2 px-3 mt-4 bg-white">
+    <Card className="py-2 px-3 mt-4 bg-white">
       <Accordion type="single" defaultValue="item-1" collapsible>
       <AccordionItem value="item-1">
         <AccordionTrigger>Дебетовые продукты</AccordionTrigger>
@@ -37,6 +37,6 @@ export const List=()=>{
         </AccordionContent>
       </AccordionItem>
       </Accordion>
-    </CommonCard>
+    </Card>
   )
 }
