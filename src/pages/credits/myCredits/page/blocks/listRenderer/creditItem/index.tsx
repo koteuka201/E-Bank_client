@@ -1,4 +1,5 @@
 import { PaymentType, TariffBrief } from "@shared/api"
+import { FormatCurrencyToSign } from "@shared/lib"
 import { useMemo } from "react"
 
 export type CreditItemProps={
@@ -19,8 +20,7 @@ export const CreditItem=({
 }:CreditItemProps)=>{
   
   const currencySign=useMemo(()=>{
-    if(currencyType) return '₽'
-    return '₽'
+    return FormatCurrencyToSign(currencyType)
   },[currencyType])
 
   const paymentTypeText=useMemo(()=>{

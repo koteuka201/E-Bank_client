@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { WithdrawCreditButton } from "../withdrawCreditButton"
 import { DepositCreditButton } from "../depositCreditButton"
-import { formatDateToRussian } from "@shared/lib"
+import { FormatCurrencyToSign, formatDateToRussian } from "@shared/lib"
 import { CloseCreditButton } from "../closeCredit"
 import { PaymentType, UserRole } from "@shared/api"
 import { Card } from "@shared/components"
@@ -37,8 +37,7 @@ export const Content=({
 }:ContentProps)=>{
 
   const currencySign=useMemo(()=>{
-    if(currencyType) return '₽'
-    return '₽'
+    return FormatCurrencyToSign(currencyType)
   },[currencyType])
 
   const dateText=useMemo(()=>{
@@ -61,6 +60,7 @@ export const Content=({
     <Card className="p-4 pb-3 mt-6 font-semibold ">
       <div className="flex justify-between">
         <span className="text-lg">{tariffName} {isFrozen === true && <span className="text-red">(закрыт)</span>}</span>
+        
         <div className="rounded-lg bg-bgMain dark:bg-bgMainDark py-1 px-2.5">{interestRate}%</div>
       </div>
       <div className="inline-block rounded-lg text-sm bg-bgMain py-0.5 px-2.5">

@@ -1,17 +1,17 @@
 import { BankAccountType, CardCategory, CardType } from "@shared/api"
-import { StringOrNull } from "@shared/lib"
+import { FormatCurrencyToSign } from "@shared/lib"
 import { RectangleHorizontal } from "lucide-react"
 import { useMemo } from "react"
 
 export type AccountItemProps={
   readonly id: string
-  readonly currencyType: StringOrNull
+  readonly currencyType: string | undefined
   readonly balance: number
   readonly bankAccountType: BankAccountType
   readonly isFrozen: boolean
-  readonly accountName: StringOrNull
-  readonly closeDateTime: StringOrNull
-  readonly cardNumber: StringOrNull
+  readonly accountName: string | undefined
+  readonly closeDateTime: string | undefined
+  readonly cardNumber: string | undefined
   readonly cardCategory: CardCategory
   readonly cardType: CardType
 }
@@ -47,8 +47,7 @@ export const AccountItem=({
   },[cardType])
 
   const currencySign=useMemo(()=>{
-    if(currencyType) return '₽'
-    return '₽'
+    return FormatCurrencyToSign(currencyType)
   },[currencyType])
 
   return(

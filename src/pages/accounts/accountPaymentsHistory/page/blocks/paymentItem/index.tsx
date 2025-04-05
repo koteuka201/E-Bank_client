@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { ArrowBigLeft, ArrowBigRight, Landmark } from "lucide-react"
 import { BankAccountOperationInitiator, BankAccountOperationStatus, BankAccountOperationType } from "@shared/api"
-import { formatDateToRussian } from "@shared/lib"
+import { formatDateToRussian, FormatInitiatorToRus, FormatOperationTypeToRus } from "@shared/lib"
 import { IconCircle } from "./iconCircle"
 
 export type PaymentItemProp = {
@@ -42,14 +42,7 @@ export const PaymentItem=({
   },[bankAccountOperationStatus])
   
   const operationInitiator=useMemo(()=>{
-    switch(bankAccountOperationInitiator){
-      case BankAccountOperationInitiator.User:
-        return 'Пользователь'
-      case BankAccountOperationInitiator.System:
-        return 'Система'
-        case BankAccountOperationInitiator.Other:
-        return 'Прочий инициатор'
-    }
+    return FormatInitiatorToRus(bankAccountOperationInitiator)
   },[bankAccountOperationInitiator])
 
   const operationTypeIcon=useMemo(()=>{
@@ -64,14 +57,7 @@ export const PaymentItem=({
   },[iconColor,bankAccountOperationType])
 
   const operationTypeText=useMemo(()=>{
-    switch(bankAccountOperationType){
-      case BankAccountOperationType.LoanRepayment:
-        return 'Погашение кредита'
-      case BankAccountOperationType.Replenishment:
-        return 'Пополнение'
-      case BankAccountOperationType.Withdrawal:
-        return 'Снятие'
-    }
+    return FormatOperationTypeToRus(bankAccountOperationType)
   },[bankAccountOperationType])
 
   const operationMoneyText=useMemo(()=>{
