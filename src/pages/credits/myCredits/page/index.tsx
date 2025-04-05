@@ -1,12 +1,16 @@
 import { Suspense } from "react"
 import { Container, Spinner } from "@shared/ui"
 import { List, MoveToCreditsCatalogButton } from "./blocks"
+import { CreditRaitingModal } from "@entities/credits"
 
 export const MyCredits=()=>{
   return(
     <>
       <Container fluid>
-        <div className="font-semibold text-2xl border-b">Мои кредиты</div>
+        <div className="font-semibold border-b">
+          <span className="text-2xl">Мои кредиты</span>
+          <CreditRaitingModal raitingType={"my"} />
+        </div>
         <MoveToCreditsCatalogButton />
         <Suspense fallback={<Spinner />}>
           <List />

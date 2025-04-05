@@ -8,6 +8,7 @@ import { ClientsRouting } from "./clients"
 import { LoginRouting } from "./login"
 import { RegistrationPageRouting } from "./register"
 import { BannedPageRouting } from "./bannedPage"
+import { RedirectRouting } from "./redirect"
 
 export const Routing=()=>{
 
@@ -17,6 +18,7 @@ export const Routing=()=>{
         {BannedPageRouting}
         {LoginRouting}
         {RegistrationPageRouting}
+        {RedirectRouting}
       </Route>
       <Route 
         element={

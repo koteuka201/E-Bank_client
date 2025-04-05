@@ -5,6 +5,7 @@ import { BlockUserButton } from "@widgets/users"
 import { useMemo } from "react"
 import { AccountsList } from "../accountsList"
 import { CreditsList } from "../creditsList"
+import { CreditRaitingModal } from "@entities/credits"
 
 export type ContentProps={
   id: string
@@ -40,10 +41,11 @@ export const Content=({
     <>
       <Card className="p-4 pb-3 mt-6 font-semibold">
         <div className="flex justify-between items-center">
-          <span className="text-lg">
-            {userName}
-            <div className="inline-block rounded-lg text-[12px] bg-bgMain dark:bg-bgMainDark py-0.5 px-2.5 ms-2">{roleText}</div>
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-lg">{userName}</span>
+            <CreditRaitingModal raitingType={"other"} userId={id} />
+          </div>
+          <div className="inline-block rounded-lg text-[12px] bg-bgMain dark:bg-bgMainDark py-0.5 px-2.5 ms-2">{roleText}</div>
           {isManuallyBlocked===false ? (
             <BlockUserButton id={id} />
           ) : (

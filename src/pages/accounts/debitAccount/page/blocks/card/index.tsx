@@ -1,5 +1,5 @@
 import { CardCategory, UserRole } from "@shared/api"
-import { StringOrNull } from "@shared/lib"
+import { FormatCurrencyToSign } from "@shared/lib"
 import { CardItem } from "./cardItem"
 import { CloseAccountButton } from "./blockAccountButton"
 import { useMemo } from "react"
@@ -12,11 +12,11 @@ import { Link } from "react-router-dom"
 
 export type CardBlockProps={
   readonly id: string
-  readonly currencyType: StringOrNull
+  readonly currencyType: string | undefined
   readonly balance: number
   readonly isFrozen: boolean
-  readonly accountName: StringOrNull
-  readonly cardNumber: StringOrNull
+  readonly accountName: string | undefined
+  readonly cardNumber: string | undefined
   readonly cardCategory: CardCategory
   readonly closeDateTime: string | null | undefined
 }
@@ -43,8 +43,7 @@ export const CardBlock=({
   },[cardCategory])
 
   const currencySign=useMemo(()=>{
-    if(currencyType) return '₽'
-    return '₽'
+    return FormatCurrencyToSign(currencyType)
   },[currencyType])
 
   return(
