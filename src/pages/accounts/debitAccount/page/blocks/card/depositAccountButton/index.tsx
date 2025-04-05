@@ -1,13 +1,13 @@
 import { useCallback } from "react"
 import { PaymentAccountBody, PaymentButton, useDepositAccount } from "@features/accounts"
 import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
-import { StringOrNull, useSwitch } from "@shared/lib"
+import { useSwitch } from "@shared/lib"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { CircleFadingPlus } from "lucide-react"
 
 export type DepositAccountButtonProps={
   readonly accountId: string
-  readonly currencyType: StringOrNull
+  readonly currencyType: string | undefined
 }
 
 export const DepositAccountButton=({accountId, currencyType}: DepositAccountButtonProps)=>{

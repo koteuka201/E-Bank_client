@@ -2,12 +2,11 @@ import cn from "classnames"
 import { CircleCheckBig } from "lucide-react"
 
 import { CardCategory } from "@shared/api"
-import { StringOrNull } from "@shared/lib"
 import styles from './index.module.scss'
 
 export type CardItemProps={
-  readonly accountName: StringOrNull
-  readonly cardNumber: StringOrNull
+  readonly accountName: string | undefined
+  readonly cardNumber: string | undefined
   readonly cardCategory: CardCategory
 }
 

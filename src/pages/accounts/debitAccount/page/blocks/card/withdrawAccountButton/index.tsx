@@ -1,14 +1,14 @@
 import { useCallback } from "react"
 import { PaymentAccountBody, PaymentButton, useWithdrawAccount } from "@features/accounts"
 import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
-import { StringOrNull, useSwitch } from "@shared/lib"
+import { useSwitch } from "@shared/lib"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { CircleArrowRight } from "lucide-react"
 
 export type WithdrawAccountButtonProps={
   readonly accountId: string
   readonly balance: number
-  readonly currencyType: StringOrNull
+  readonly currencyType: string | undefined
 }
 
 export const WithdrawAccountButton=({accountId, balance, currencyType}: WithdrawAccountButtonProps)=>{
