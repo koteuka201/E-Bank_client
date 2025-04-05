@@ -10,7 +10,7 @@ export type AccountItemProps={
   readonly bankAccountType: BankAccountType
   readonly isFrozen: boolean
   readonly accountName: string | undefined
-  readonly closeDateTime: string | undefined
+  readonly closeDateTime: string | undefined | null
   readonly cardNumber: string | undefined
   readonly cardCategory: CardCategory
   readonly cardType: CardType
