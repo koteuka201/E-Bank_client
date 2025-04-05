@@ -26,7 +26,7 @@ export const BankAccountsRenderer=({accounts}:BankAccountsRendererProps)=>{
       </div>
     )
   }
-  
+   
   return(
     <div className="grid gap-1.5">
       {accounts.map((account, index)=>(
