@@ -5,6 +5,7 @@ import { FormatCurrencyToSign, formatDateToRussian } from "@shared/lib"
 import { CloseCreditButton } from "../closeCredit"
 import { PaymentType, UserRole } from "@shared/api"
 import { Card } from "@shared/components"
+import { OverduePaymentsModal } from "../overduePayments"
 
 export type ContentProps={
   readonly id: string
@@ -60,7 +61,7 @@ export const Content=({
     <Card className="p-4 pb-3 mt-6 font-semibold ">
       <div className="flex justify-between">
         <span className="text-lg">{tariffName} {isFrozen === true && <span className="text-red">(закрыт)</span>}</span>
-        
+        <OverduePaymentsModal CreditId={id} />
         <div className="rounded-lg bg-bgMain dark:bg-bgMainDark py-1 px-2.5">{interestRate}%</div>
       </div>
       <div className="inline-block rounded-lg text-sm bg-bgMain py-0.5 px-2.5">

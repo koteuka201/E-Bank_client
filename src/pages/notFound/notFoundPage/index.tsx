@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import { WELCOME_PAGE_URL } from "@shared/config"
-import { OverduePaymentsModal } from "@pages/credits/creditDetails/page/blocks/overduePayments"
 
 export const NotFoundPage=()=>{
   return(
@@ -10,7 +9,6 @@ export const NotFoundPage=()=>{
       <Link to={WELCOME_PAGE_URL} className="mt-6 px-6 py-2 bg-main text-white rounded-lg shadow-md hover:bg-main/90 transition">
         Вернуться на главную
       </Link>
-      <OverduePaymentsModal CreditId="asd" />
     </div>
   )
 }
