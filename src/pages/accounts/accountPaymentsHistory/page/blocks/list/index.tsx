@@ -1,5 +1,4 @@
 import { useGetAccountsPaymentsHistory, useGetMyAccountsPaymentsHistory } from "@entities/accounts/paymentHistory"
-import { Spinner } from "@shared/ui"
 import { PaymentItem } from "../paymentItem"
 import { useGetMyProfile } from "@entities/clients"
 import { UserRole } from "@shared/api"
