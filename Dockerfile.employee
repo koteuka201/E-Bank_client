@@ -1,0 +1,19 @@
+# Сборка
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+COPY package.json package-lock.json* ./
+RUN npm install
+
+COPY . .
+# Указываем тип приложения через переменную окружения иビルド
+RUN npm run build -- --mode employee
+
+# Production сервер
+FROM nginx:stable-alpine
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY ./nginx-employee.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 5174
+CMD ["nginx", "-g", "daemon off;"]

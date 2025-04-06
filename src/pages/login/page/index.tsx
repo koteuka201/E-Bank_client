@@ -5,6 +5,7 @@ import userManager from "@shared/contexts/oauth/userManager"
 import { useCallback } from "react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
+import { UserRole } from '@shared/api';
 
 export const LoginPage=()=>{
 
@@ -30,8 +31,12 @@ export const LoginPage=()=>{
   //надо добавить logout с удалением токена и из куки, потому что оно туда сохраняет
   //надо ещё кнопку закастомить, чтобы было органично + убрать лишнее, потому что авторизация теперь только через сторонний сервис делается я так понял
   const oauth = () => {
+    const redirectPath = import.meta.env["VITE_APP_TYPE"]===UserRole.Client
+    ? 'http://158.160.18.15:5175/signin-oidc'
+    : 'http://158.160.18.15:5174/signin-oidc'
+
     userManager.signinRedirect({
-      state: { path: "http://localhost:5173/signin-oidc" },  //можно добавить путь по которому оно будет редиректнуто после успешного логина, вроде не должно поломаться
+      state: { path: redirectPath },  //можно добавить путь по которому оно будет редиректнуто после успешного логина, вроде не должно поломаться
     }).catch((error) => {
       console.error("Ошибка при signinRedirect:", error);
     });
