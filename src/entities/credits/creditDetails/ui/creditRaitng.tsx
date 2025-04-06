@@ -30,7 +30,7 @@ export const CreditRaitingModal=({raitingType, userId}:CreditRaitingModalProps)=
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <div onClick={handleOpen} className="text-muted dark:text-muted-foreground underline cursor-pointer">
+      <div onClick={handleOpen} className="text-gray-400 dark:text-muted-foreground underline cursor-pointer">
         Посмотреть кредитную характеристику
       </div>
       <DialogContent>

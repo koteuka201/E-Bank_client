@@ -1,30 +1,8 @@
-import { LoginBody, useLogin } from "@features/login"
-import { Button, Card, CardContent, CardHeader, CardTitle, Input, Label } from "@shared/components"
-import { REGISTER_PAGE_URL, WELCOME_PAGE_URL } from "@shared/config"
+import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle} from "@shared/components"
 import userManager from "@shared/contexts/oauth/userManager"
-import { useCallback } from "react"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import { Link, useNavigate } from "react-router-dom"
+import { ArrowRight, Building, Shield } from "lucide-react";
 
 export const LoginPage=()=>{
-
-  const navigate=useNavigate()
-  const {control, handleSubmit, reset, formState: {errors}}=useForm<LoginBody>() 
-  const {mutate: login, isPending }=useLogin()
-
-  const onSubmit: SubmitHandler<LoginBody>=useCallback((data)=>{
-    if(data.email == undefined || data.password == undefined) return
-    login({ data },
-    {
-      onSuccess: (response) => {
-        localStorage.setItem('token', response.token)
-        reset()
-        navigate(WELCOME_PAGE_URL)
-      },
-    }
-  )
-  },[login, navigate, reset])
-
   //добавил этот прикол сюда, по идеи можешь создать провайдер какой-нить, чтобы он сам постоянно кидал на страницу, если у чела нет токена
   //ну или так и оставить, в принципе не особо важно
   //надо добавить logout с удалением токена и из куки, потому что оно туда сохраняет
@@ -38,62 +16,37 @@ export const LoginPage=()=>{
   };
 
   return(
-    <div className="flex items-center justify-center min-h-screen">
-      <Card className="w-full max-w-sm p-6">
-        <CardHeader>
-          <CardTitle className="text-center">Вход в аккаунт</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <button className="btn btn-primary btn-sm" onClick={() => oauth()}>
-            Oauth
-          </button>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Controller 
-                defaultValue=""
-                name="email"
-                control={control}
-                rules={{required: "Это обязательное поле"}}
-                render={({field})=>(
-                  <Input 
-                    {...field}
-                    id="email"
-                    type="email"
-                    placeholder="Введите email" 
-                    required
-                  />
-                )}
-              />
-              {errors.email && <span className="text-red text-sm">{errors.email.message}</span>}
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <Card className="w-full max-w-md shadow-lg">
+        <CardHeader className="space-y-1">
+          <div className="flex justify-center mb-2">
+            <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <Building className="h-6 w-6 text-primary" />
             </div>
-            <div>
-              <Label htmlFor="password">Пароль</Label>
-              <Controller 
-                defaultValue=""
-                name="password"
-                control={control}
-                rules={{required: "Это обязательное поле"}}
-                render={({field})=>(
-                  <Input 
-                    {...field}
-                    id="password"
-                    type="password"
-                    placeholder="Введите пароль" 
-                    required
-                  />
-                )}
-              />
-              {errors.password && <span className="text-red text-sm">{errors.password.message}</span>}
-            </div>
-            <Button isLoading={isPending} type="submit" className="w-full">Войти</Button>
-          </form>
-          <div className="mt-4 text-center text-sm">
-            Нет аккаунта?{" "}
-            <Link to={REGISTER_PAGE_URL} className="text-blue-500 hover:underline">
-              Зарегистрироваться
-            </Link>
           </div>
+          <CardTitle className="text-2xl font-bold text-center">Вход в аккаунт</CardTitle>
+          <CardDescription className="text-center">
+            Используйте ваш E-bank аккаунт для безопасного входа в систему
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="p-6 border rounded-lg bg-primary/5">
+            <div className="flex items-start space-x-4">
+              <Shield className="h-6 w-6 text-primary mt-0.5" />
+              <div>
+                <h3 className="font-medium">Безопасный вход</h3>
+                <p className="text-sm text-muted-foreground">
+                  Ваши данные защищены. Приложение не хранит ваши данные для входа
+                </p>
+              </div>
+            </div>
+          </div>
+          <Button type="button" className="w-full h-12 text-base font-medium" onClick={oauth}>
+            <div className="flex items-center justify-center">
+              Войти с помощью E-bank аккаунт
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </div>
+          </Button>
         </CardContent>
       </Card>
     </div>
