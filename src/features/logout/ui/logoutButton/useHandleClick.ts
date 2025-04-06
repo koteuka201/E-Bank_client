@@ -10,7 +10,9 @@ export const useHandleClick=()=>{
   const navigate = useNavigate()
 
   const handleClick=useCallback(()=>{
-    localStorage.removeItem('token')
+    localStorage.setItem('theme', 'light')
+    localStorage.clear()
+    sessionStorage.clear()
     queryClient.invalidateQueries({ queryKey: [ApiTagsEnum.ClientProfile] })
     navigate(LOGIN_PAGE_URL)
   },[navigate, queryClient])
