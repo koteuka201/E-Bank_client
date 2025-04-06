@@ -1,4 +1,4 @@
-import { useGetMyProfile, useGetUserConfig } from "@entities/clients"
+import { useGetMyProfile } from "@entities/clients"
 import { useMemo } from "react"
 
 export const useCheckUserAuth=()=>{
@@ -7,8 +7,7 @@ export const useCheckUserAuth=()=>{
   localStorage.setItem('token', JWTToken)
 
   const {data, isLoading, isError, isFetching}=useGetMyProfile()
-  // const {data: configData, isLoading: isLoadingConfig, isFetching: isFetchingConfig}=useGetUserConfig({params: {device: 'browser'}, id: data?.id || ''})
-
+  
   const isAuth=useMemo(()=>{
     if(!JWTToken) return false
 

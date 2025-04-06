@@ -1,6 +1,7 @@
 import { useGetMyProfile, useGetUserConfig } from "@entities/clients"
 import { CreateConfigBody, useCreateUserConfig } from "@features/users/createUserConfig"
 import { ParseConfig } from "../functions/parseConfig"
+import { useEffect, useState } from "react"
 
 export const defaultUserConfig:CreateConfigBody={
   device: 'browser',
@@ -8,17 +9,30 @@ export const defaultUserConfig:CreateConfigBody={
 }
 
 export const UseCreateDefaultConfigOrGetParsed=()=>{
-  const {data: profile}=useGetMyProfile()
-  const {data: config, isError}=useGetUserConfig({params: {device: 'browser'}, id: profile?.id || ''})
-  if(!profile){
-    return ParseConfig(config?.config || defaultUserConfig.config)
+  const { data: profile, isLoading: profileLoading } = useGetMyProfile()
+  const { data: config, isError, isLoading: configLoading } = useGetUserConfig({
+    params: { device: 'browser' },
+    id: profile?.id || ''
+  })
+
+  const { mutate } = useCreateUserConfig(profile?.id || '')
+  const [parsed, setParsed] = useState(ParseConfig(defaultUserConfig.config))
+
+  useEffect(() => {
+    if (profile && isError) {
+      mutate({ data: defaultUserConfig })
+      setParsed(ParseConfig(defaultUserConfig.config))
+    }
+
+    if (profile && config?.config) {
+      setParsed(ParseConfig(config.config))
+    }
+  }, [profile, config, isError])
+
+  const isReady = !profileLoading && !configLoading
+
+  return {
+    config: parsed,
+    isReady
   }
-  const {mutate}=useCreateUserConfig(profile.id)
-  
-  if(isError){
-    mutate({data: defaultUserConfig})
-    return ParseConfig(defaultUserConfig.config)
-  }
-  
-  return ParseConfig(config?.config || defaultUserConfig.config)
 }

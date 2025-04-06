@@ -1,5 +1,5 @@
 import { BankAccountOperationInitiator, BankAccountOperationStatus, BankAccountType, PaymentOperation } from "@shared/api"
-import { PagedListMetaData } from "@shared/lib"
+// import { PagedListMetaData } from "@shared/lib"
 
 export type GetAccountsPaymentsHistoryRequestArgs={
   UsersIds: string[] | undefined

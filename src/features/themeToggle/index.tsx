@@ -7,27 +7,17 @@ import { useEffect, useState } from "react"
 export const ThemeToggle = () => {
   const { data: profile } = useGetMyProfile()
   const { mutate, isPending } = useCreateUserConfig(profile?.id || '')
-  
-  const { theme, hidenAccountsId } = UseCreateDefaultConfigOrGetParsed()
-  const [isDark, setIsDark] = useState(
-    document.documentElement.classList.contains("dark") ||
-    localStorage.getItem("theme") === "dark" || theme === 'dark'
-  )
-  
-  const handleToggle = () => {
-    const newTheme = isDark ? 'light' : 'dark'
-    const newConfig = {
-      device: 'browser',
-      config: `{"theme": "${newTheme}", "hidenAccountsId":${Array.isArray(hidenAccountsId) ? JSON.stringify(hidenAccountsId) : '[]'}}`
-    }
-    mutate({ data: newConfig },{
-      onSuccess: () => {
-        setIsDark(!isDark)
-      },
-    })
-  }
+
+  const { config, isReady } = UseCreateDefaultConfigOrGetParsed()
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
+    if (!isReady) return
+    setIsDark(config.theme === 'dark')
+  }, [isReady, config.theme])
+
+  useEffect(() => {
+    if (!isReady) return
     if (isDark) {
       document.documentElement.classList.add("dark")
       localStorage.setItem("theme", "dark")
@@ -35,7 +25,28 @@ export const ThemeToggle = () => {
       document.documentElement.classList.remove("dark")
       localStorage.setItem("theme", "light")
     }
-  }, [isDark])
+  }, [isDark, isReady])
+
+  const handleToggle = () => {
+    if (!profile) return
+    const newTheme = isDark ? 'light' : 'dark'
+
+    const newConfig = {
+      device: 'browser',
+      config: JSON.stringify({
+        theme: newTheme,
+        hidenAccountsId: config.hidenAccountsId || []
+      })
+    }
+
+    mutate({ data: newConfig }, {
+      onSuccess: () => {
+        setIsDark(!isDark)
+      }
+    })
+  }
+
+  if (!isReady) return null
 
   return (
     <Button
