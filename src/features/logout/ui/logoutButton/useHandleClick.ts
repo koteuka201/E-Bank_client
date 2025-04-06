@@ -10,7 +10,7 @@ export const useHandleClick=()=>{
   const navigate = useNavigate()
 
   const handleClick=useCallback(()=>{
-    localStorage.setItem('theme', 'light')
+    document.documentElement.classList.remove("dark")
     localStorage.clear()
     sessionStorage.clear()
     queryClient.invalidateQueries({ queryKey: [ApiTagsEnum.ClientProfile] })
