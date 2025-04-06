@@ -45,7 +45,7 @@ export const Content=({
             <span className="text-lg">{userName}</span>
             <CreditRaitingModal raitingType={"other"} userId={id} />
           </div>
-          <div className="inline-block rounded-lg text-[12px] bg-bgMain dark:bg-bgMainDark py-0.5 px-2.5 ms-2">{roleText}</div>
+          <div className="inline-block rounded-lg text-[12px] bg-bgMain dark:bg-gray-700 py-0.5 px-2.5 ms-2">{roleText}</div>
           {isManuallyBlocked===false ? (
             <BlockUserButton id={id} />
           ) : (
@@ -60,8 +60,8 @@ export const Content=({
           </div>
         </div>
       </Card>
-      {role===UserRole.Client &&
-        <Card className="py-2 px-3 mt-4 bg-white">
+      {role===UserRole.Client || role===UserRole.Employee &&
+        <Card className="py-2 px-3 mt-4">
           <Accordion type="single" defaultValue="item-1" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger>Дебетовые счета</AccordionTrigger>

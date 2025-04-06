@@ -1,4 +1,4 @@
-import { useGetUsersFeed } from "@entities/clients"
+import {  useGetUsersFeed } from "@entities/clients"
 import { UserRole } from "@shared/api"
 import { Card } from "@shared/components"
 import { Spinner } from "@shared/ui"
