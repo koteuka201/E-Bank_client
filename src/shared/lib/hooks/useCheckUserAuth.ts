@@ -2,7 +2,9 @@ import { useGetMyProfile } from "@entities/clients"
 import { useMemo } from "react"
 
 export const useCheckUserAuth=()=>{
-  const JWTToken=localStorage.getItem('token')
+  const raw = sessionStorage.getItem('oidc.user:http://158.160.18.15:5004/:ebankclient')
+  const JWTToken = raw ? JSON.parse(raw).access_token : null
+  localStorage.setItem('token', JWTToken)
   
   const {data, isLoading, isError, isFetching}=useGetMyProfile()
 
