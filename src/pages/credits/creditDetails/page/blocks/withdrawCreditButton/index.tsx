@@ -76,18 +76,19 @@ export const WithdrawCreditButton=({creditId, balance}: WithdrawCreditButtonProp
               name="currencyType"
               control={control}
               rules={{required: "Это обязательное поле",
-                pattern: {
-                  value: /^[A-Z]{1,5}$/,
-                  message: "Разрешены только латинские буквы в верхнем регистре (до 5 символов)"
-                }
+                
               }}
               render={({field})=>(
-                <Input 
-                  {...field}
-                  id="currencyType"
-                  type="text"
-                  placeholder="Введите тип валюты"
-                />
+                <Select onValueChange={field.onChange} {...field}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Выберите" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={'RUB'}>RUB</SelectItem>
+                    <SelectItem value={'EUR'}>EUR</SelectItem>
+                    <SelectItem value={'USD'}>USD</SelectItem>
+                  </SelectContent>
+                </Select>
               )}
             />
             {errors.currencyType && <span className="text-red text-sm">{errors.currencyType.message}</span>}
