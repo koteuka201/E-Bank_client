@@ -2,9 +2,6 @@ import { UserRole } from "@shared/api"
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle} from "@shared/components"
 import userManager from "@shared/contexts/oauth/userManager"
 import { ArrowRight, Building, Shield } from "lucide-react"
-import { useCallback } from "react"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import { Link, useNavigate } from "react-router-dom"
 
 export const LoginPage=()=>{
   //добавил этот прикол сюда, по идеи можешь создать провайдер какой-нить, чтобы он сам постоянно кидал на страницу, если у чела нет токена
