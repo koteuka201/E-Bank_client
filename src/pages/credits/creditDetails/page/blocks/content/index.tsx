@@ -64,7 +64,7 @@ export const Content=({
         <OverduePaymentsModal CreditId={id} />
         <div className="rounded-lg bg-bgMain dark:bg-bgMainDark py-1 px-2.5">{interestRate}%</div>
       </div>
-      <div className="inline-block rounded-lg text-sm bg-bgMain py-0.5 px-2.5">
+      <div className="inline-block rounded-lg text-sm bg-bgMain dark:bg-bgMainDark py-0.5 px-2.5">
         Взят {dateText}
       </div>
       <div className="flex justify-between mt-2">
@@ -75,7 +75,7 @@ export const Content=({
         <span>Название кредитного счёта </span>
         <span>{accountNumber}</span>
       </div>
-      <div className="bg-bgMain rounded-[12px] px-4 py-3 flex justify-between">
+      <div className="bg-bgMain dark:bg-bgMainDark rounded-[12px] px-4 py-3 flex justify-between">
         <div className="text-lg">
           <div>Остаток долга: {debt} {currencySign}</div>
           <div className="mt-2">Баланс: {balance} {currencySign}</div>

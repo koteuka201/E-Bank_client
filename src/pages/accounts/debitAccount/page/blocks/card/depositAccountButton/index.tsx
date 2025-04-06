@@ -1,6 +1,6 @@
 import { useCallback } from "react"
 import { PaymentAccountBody, PaymentButton, useDepositAccount } from "@features/accounts"
-import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label } from "@shared/components"
+import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@shared/components"
 import { useSwitch } from "@shared/lib"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { CircleFadingPlus } from "lucide-react"
@@ -42,22 +42,23 @@ export const DepositAccountButton=({accountId, currencyType}: DepositAccountButt
               Валюта
             </Label>
             <Controller 
-              defaultValue={currencyType ? currencyType : ''}
+              defaultValue={currencyType ? currencyType : 'RUB'}
               name="currencyType"
               control={control}
               rules={{required: "Это обязательное поле",
-                pattern: {
-                  value: /^[A-Z]{1,5}$/,
-                  message: "Разрешены только латинские буквы в верхнем регистре (до 5 символов)"
-                }
+                
               }}
               render={({field})=>(
-                <Input 
-                  {...field}
-                  id="currencyType"
-                  type="text"
-                  placeholder="Введите тип валюты"
-                />
+                <Select onValueChange={field.onChange} {...field}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Выберите" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={'RUB'}>RUB</SelectItem>
+                    <SelectItem value={'EUR'}>EUR</SelectItem>
+                    <SelectItem value={'USD'}>USD</SelectItem>
+                  </SelectContent>
+                </Select>
               )}
             />
             {errors.currencyType && <span className="text-red text-sm">{errors.currencyType.message}</span>}

@@ -1,7 +1,7 @@
 import { AccountAndCard } from "@entities/accounts"
 import { AccountItem } from "./accountItem/accountItem"
-import { Link } from "react-router-dom"
-import { GENERATE_BANK_ACCOUNT_PAGE_URL } from "@shared/config"
+// import { Link } from "react-router-dom"
+// import { GENERATE_BANK_ACCOUNT_PAGE_URL } from "@shared/config"
 
 export type BankAccountsRendererProps={
   readonly accounts: AccountAndCard[]
@@ -30,8 +30,8 @@ export const BankAccountsRenderer=({accounts}:BankAccountsRendererProps)=>{
   return(
     <div className="grid gap-1.5">
       {accounts.map((account, index)=>(
-        <Link key={index} to={GENERATE_BANK_ACCOUNT_PAGE_URL('debit',account.bankAccount.id)}>
           <AccountItem 
+            key={index}
             id={account.bankAccount.id}
             currencyType={account.bankAccount.currencyType}
             balance={account.bankAccount.balance}
@@ -43,7 +43,7 @@ export const BankAccountsRenderer=({accounts}:BankAccountsRendererProps)=>{
             cardType={account.card.cardType}
             closeDateTime={account.bankAccount.closeDateTime}
           />
-        </Link>
+        
       ))}
     </div>
   )

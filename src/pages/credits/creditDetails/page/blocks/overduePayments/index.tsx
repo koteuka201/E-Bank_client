@@ -63,7 +63,7 @@ export const OverduePaymentsModal=({CreditId}: OverduePaymentsModalProps)=>{
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <Button onClick={handleOpen} variant="main">
         <AlertCircle className="mr-2 h-4 w-4" />
-        Посмотреть просроченные платежи
+        Просроченные платежи
       </Button>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
