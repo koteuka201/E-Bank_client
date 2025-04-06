@@ -1,11 +1,14 @@
 import { useGetMyAccounts } from "@entities/accounts"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Card } from "@shared/components"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Button, Card } from "@shared/components"
 import { Spinner } from "@shared/ui"
 import { BankAccountsRenderer } from "../bankAccountsRenderer"
+import { UseCreateDefaultConfigOrGetParsed, useSwitch } from "@shared/lib"
 
 export const List=()=>{
   
-  const {data, isError, isLoading, isFetching}=useGetMyAccounts()
+  const [isOpen, setIsOpen]=useSwitch()
+  const {config}=UseCreateDefaultConfigOrGetParsed()
+  const {data, isError, isLoading, isFetching}=useGetMyAccounts({ accountsIds: !isOpen ? config.hidenAccountsId : [] })
 
   if(isLoading || isFetching){
     return(
@@ -27,6 +30,12 @@ export const List=()=>{
       <AccordionItem value="item-1">
         <AccordionTrigger>Дебетовые продукты</AccordionTrigger>
         <AccordionContent>
+          <Button variant={"main"} className="mb-2" onClick={()=>setIsOpen(!isOpen)}>
+            {!isOpen ? 
+              'Показывать скрытые аккаунты'
+              : 'Не показывать скрытые аккаунты'
+            }
+          </Button>
           <BankAccountsRenderer accounts={data?.cardBankAccounts} />
         </AccordionContent>
       </AccordionItem>
