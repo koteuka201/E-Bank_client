@@ -30,7 +30,7 @@ export const WithdrawAccountButton=({accountId, balance, currencyType}: Withdraw
 
   return(
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <PaymentButton onClick={handleOpen} icon={<CircleArrowRight size={28} />} text="Снять, со счёта карты" />
+      <PaymentButton onClick={handleOpen} icon={<CircleArrowRight size={28} />} text="Снять/перевести, со счёта карты" />
       <DialogContent>
         <DialogHeader>
           <DialogTitle>

@@ -22,7 +22,7 @@ export const List=()=>{
   }
 
   return(
-    <Card className="py-2 px-3 mt-4 bg-white">
+    <Card className="py-2 px-3 mt-4">
       <Accordion type="single" defaultValue="item-1" collapsible>
       <AccordionItem value="item-1">
         <AccordionTrigger>Дебетовые продукты</AccordionTrigger>

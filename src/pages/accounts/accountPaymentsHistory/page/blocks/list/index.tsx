@@ -13,40 +13,29 @@ export const List=({id}: ListProps)=>{
 
   const {data: profileData}=useGetMyProfile()
 
+  const myHistory = useGetMyAccountsPaymentsHistory(id, import.meta.env["VITE_APP_TYPE"]===UserRole.Employee ? 'other' : 'my')
+  const commonHistory = useGetAccountsPaymentsHistory({
+    UsersIds: undefined,
+    BankAccountsIds: [id],
+    OperationDateTime: undefined,
+    BankAccountOperationInitiator: undefined,
+    BankAccountOperationStatus: undefined,
+    BankAccountType: undefined
+  })
 
-  const { data, isError, isLoading, isFetching } =
-  profileData?.role === UserRole.Client
-    ? useGetMyAccountsPaymentsHistory({
-        UsersIds: undefined,
-        BankAccountsIds: [id],
-        OperationDateTime: undefined,
-        BankAccountOperationInitiator: undefined,
-        BankAccountOperationStatus: undefined,
-        BankAccountType: undefined
-      })
-    : useGetAccountsPaymentsHistory({
-        UsersIds: undefined,
-        BankAccountsIds: [id],
-        OperationDateTime: undefined,
-        BankAccountOperationInitiator: undefined,
-        BankAccountOperationStatus: undefined,
-        BankAccountType: undefined
-      })
+const { data } =
+  profileData?.role !== UserRole.Client
+    ? myHistory
+    : commonHistory
   
-    if(isLoading || isFetching){
-      return(
-        <div className="flex justify-center mt-10">
-          <Spinner />
-        </div>
-      )
-    }
-  
-    if(isError || data == undefined){
+    if(
+      // isError || 
+      data == undefined){
       return(
         <div className="text-center font-semibold text-lg mt-10">Не удалось загрузить историю операций по вашему счету. Перезагрузите страницу или попробуйте позже!</div>
       )
     }
-
+  
   return(
     <Card className="py-2 px-3 mt-4">
       {data.bankAccountOperations.length === 0 &&

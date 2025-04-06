@@ -12,7 +12,7 @@ export type GetAccountsPaymentsHistoryRequestArgs={
 
 export type GetAccountsPaymentsHistoryResponse = {
   bankAccountOperations: PaymentOperation[]
-  metaData: PagedListMetaData
+  // metaData: PagedListMetaData
 }
 
 

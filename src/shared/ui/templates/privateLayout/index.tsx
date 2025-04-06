@@ -26,7 +26,7 @@ export const PrivateLayout=()=>{
   }
   
   if(isManuallyBlock===true){
-    localStorage.removeItem('token')
+    // localStorage.removeItem('token')
     queryClient.invalidateQueries({ queryKey: [ApiTagsEnum.ClientProfile] })
     return <Navigate to={BANNED_PAGE_URL} />
   }

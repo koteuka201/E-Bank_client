@@ -8,5 +8,6 @@ export enum ApiTagsEnum{
   CreditsCatalog= 'CreditsCatalog',
   CreditDetails= 'CreditDetails',
   Clients= 'Clients',
-  ClientProfile= 'ClientProfile'
+  ClientProfile= 'ClientProfile',
+  UserConfig= 'UserConfig'
 }

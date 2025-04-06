@@ -8,7 +8,7 @@ export type PaymentButtonProps = {
 
 export const PaymentButton=({onClick, icon, text}: PaymentButtonProps)=>{
   return(
-    <div className="rounded-[12px] p-3 flex gap-3 items-center cursor-pointer bg-white" onClick={onClick}>
+    <div className="rounded-[12px] p-3 flex gap-3 items-center cursor-pointer bg-white dark:bg-gray-500" onClick={onClick}>
       {icon}
       <div className="grid font-semibold">
         <span className="text-lg">{text.split(',')[0]}</span>
