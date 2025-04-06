@@ -1,6 +1,10 @@
+import { UserRole } from "@shared/api"
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle} from "@shared/components"
 import userManager from "@shared/contexts/oauth/userManager"
-import { ArrowRight, Building, Shield } from "lucide-react";
+import { ArrowRight, Building, Shield } from "lucide-react"
+import { useCallback } from "react"
+import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import { Link, useNavigate } from "react-router-dom"
 
 export const LoginPage=()=>{
   //добавил этот прикол сюда, по идеи можешь создать провайдер какой-нить, чтобы он сам постоянно кидал на страницу, если у чела нет токена
@@ -8,8 +12,12 @@ export const LoginPage=()=>{
   //надо добавить logout с удалением токена и из куки, потому что оно туда сохраняет
   //надо ещё кнопку закастомить, чтобы было органично + убрать лишнее, потому что авторизация теперь только через сторонний сервис делается я так понял
   const oauth = () => {
+    const redirectPath = import.meta.env["VITE_APP_TYPE"]===UserRole.Client
+    ? 'http://158.160.18.15:5175/signin-oidc'
+    : 'http://158.160.18.15:5174/signin-oidc'
+
     userManager.signinRedirect({
-      state: { path: "http://localhost:5173/signin-oidc" },  //можно добавить путь по которому оно будет редиректнуто после успешного логина, вроде не должно поломаться
+      state: { path: redirectPath },  //можно добавить путь по которому оно будет редиректнуто после успешного логина, вроде не должно поломаться
     }).catch((error) => {
       console.error("Ошибка при signinRedirect:", error);
     });
